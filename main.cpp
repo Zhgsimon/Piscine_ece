@@ -1,12 +1,15 @@
 #include <iostream>
 #include "graphe.h"
+#include "svgfile.h"
 
 int main()
 {
-    graphe g{"broadway.txt","broadway_weights_0.txt"};
+    Svgfile svgout;
+    graphe g{"cubetown.txt","cubetown_weights_0.txt"};
     g.afficher();
     g.afficherBFS("1");
     g.afficherDFS("1");
+    g.dessiner(svgout);
     int ncc=g.rechercher_afficherToutesCC();
     std::cout<<"Nombre de composantes connexes: "<<ncc<<std::endl;
     std::cout<<"le graphe est-il eulerien ?"<<std::endl<<std::endl;

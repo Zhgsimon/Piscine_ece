@@ -1,6 +1,8 @@
 #include <fstream>
 #include <iostream>
 #include "graphe.h"
+#include "svgfile.h"
+#include <string>
 
 graphe::graphe(std::string nomFichier,std::string fichierPoids){
     std::ifstream ifs{nomFichier};
@@ -26,6 +28,8 @@ graphe::graphe(std::string nomFichier,std::string fichierPoids){
     std::string id_depart;
     std::string id_arrive;
     std::string id_arete;
+    float poids1;
+    float poids2;
     //lecture des aretes
     for (int i=0; i<taille; ++i){
         //lecture des ids des deux extrémités
@@ -39,7 +43,28 @@ graphe::graphe(std::string nomFichier,std::string fichierPoids){
     ifs.close();
     std::ifstream ifs2{fichierPoids};
     if (!ifs2)
-        throw std::runtime_error( "Impossible d'ouvrir en lecture " + nomFichier );
+        throw std::runtime_error( "Impossible d'ouvrir en lecture " + fichierPoids );
+    ifs2 >> ordre;
+    if ( ifs2.fail() )
+        throw std::runtime_error("Probleme lecture ordre du graphe");
+    ifs2 >> taille;
+    if ( ifs2.fail() )
+        throw std::runtime_error("Probleme lecture taille du graphe");
+    for (int i=0; i< ordre; ++i)
+    {
+        ifs2>>id_arete;
+        for (int j=0; j<taille; ++j)
+        {
+            ifs2>>poids1;
+           (m_aretes.find(id_arete))->second->ajouterPoids(poids1);
+        }
+        std::vector<float> recup=m_aretes.find(id_arete)->second->getPoids();
+        for (int l=0;l<recup.size();++l)
+        {
+            std::cout<<recup[l]<<std::endl;
+        }
+    }
+    ifs2.close();
 }
 void graphe::afficher() const{
     int numero=0;
@@ -167,6 +192,20 @@ int graphe::isEulerien()const
     }
     if (degreimpair!=0 && degreimpair!=2) /// rien d'eulerien
         return 0;
+}
+
+void graphe::dessiner(Svgfile& svgout) const {
+    svgout.addGrid(50,true,"black");
+    for (int i=0; i<m_sommets.size();++i)
+    {
+        svgout.addDisk(m_sommets.find(std::to_string(i))->second->getX(), m_sommets.find(std::to_string(i))->second->getY(), 10, "red");
+    }
+    for (int i=0; i<m_aretes.size();++i)
+    {
+        std::string id_sommetDepart = m_aretes.find(std::to_string(i))->second->getSommetDepart();
+        std::string id_sommetArrive = m_aretes.find(std::to_string(i))->second->getSommetArrive();
+        svgout.addLine(m_sommets.find(id_sommetDepart)->second->getX(), m_sommets.find(id_sommetDepart)->second->getY(), m_sommets.find(id_sommetArrive)->second->getX(), m_sommets.find(id_sommetArrive)->second->getY(), "blue");
+    }
 }
 
 graphe::~graphe()

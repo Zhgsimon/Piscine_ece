@@ -10,6 +10,15 @@ void Arete::ajouterPoids(float poids){
 std::vector<float> Arete::getPoids()const{
     return m_poids;
 }
+
+std::string Arete::getSommetDepart() const{
+    return m_sommet_depart;
+}
+
+std::string Arete::getSommetArrive() const{
+    return m_sommet_arrive;
+}
+
 Arete::~Arete()
 {
     //dtor

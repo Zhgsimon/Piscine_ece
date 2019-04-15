@@ -27,30 +27,34 @@
 	<unordered_map>
 	"sommet.h"
 
-1555344189 source:c:\users\gauti\desktop\ece\info\tp2\graphe.cpp
+1555347744 source:c:\users\gauti\desktop\ece\info\tp2\graphe.cpp
 	<fstream>
 	<iostream>
 	"graphe.h"
+	"svgfile.h"
+	<string>
 
-1555340494 c:\users\gauti\desktop\ece\info\tp2\graphe.h
+1555346777 c:\users\gauti\desktop\ece\info\tp2\graphe.h
 	<string>
 	<unordered_map>
 	<vector>
 	"sommet.h"
 	"arete.h"
+	"svgfile.h"
 
-1555340494 c:\users\gauti\desktop\ece\info\tp2\sommet.h
+1555347652 c:\users\gauti\desktop\ece\info\tp2\sommet.h
 	<string>
 	<vector>
 	<unordered_map>
 	<unordered_set>
 	"arete.h"
 
-1555340494 source:c:\users\gauti\desktop\ece\info\tp2\main.cpp
+1555347802 source:c:\users\gauti\desktop\ece\info\tp2\main.cpp
 	<iostream>
 	"graphe.h"
+	"svgfile.h"
 
-1555340494 source:c:\users\gauti\desktop\ece\info\tp2\sommet.cpp
+1555347652 source:c:\users\gauti\desktop\ece\info\tp2\sommet.cpp
 	<iostream>
 	<queue>
 	<stack>
@@ -60,12 +64,47 @@
 	"sommet.h"
 	"arete.h"
 
-1555344179 c:\users\gauti\desktop\ece\info\tp2\arete.h
+1555348377 c:\users\gauti\desktop\ece\info\tp2\arete.h
 	<string>
 	<vector>
 	<unordered_map>
 	<unordered_set>
 
-1555344158 source:c:\users\gauti\desktop\ece\info\tp2\arete.cpp
+1555348377 source:c:\users\gauti\desktop\ece\info\tp2\arete.cpp
 	"arete.h"
+
+1555345731 source:c:\users\gauti\desktop\ece\info\tp2\svgfile.cpp
+	"svgfile.h"
+	<iostream>
+	<sstream>
+	"util.h"
+
+1555345607 c:\users\gauti\desktop\ece\info\tp2\svgfile.h
+	<string>
+	<fstream>
+	<set>
+
+1555345731 c:\users\gauti\desktop\ece\info\tp2\util.h
+	<string>
+	<random>
+	<ctime>
+	<iostream>
+	<cstdio>
+
+1555345738 source:c:\users\gauti\desktop\ece\info\tp2\util.cpp
+	"util.h"
+	<random>
+	<ctime>
+	<iostream>
+	<cstdio>
+	<streambuf>
+	<vector>
+	<cstdlib>
+	<cstdio>
+	<algorithm>
+	<cstring>
+	<iostream>
+	<thread>
+	"util.h"
+	<windows.h>
 

@@ -14,6 +14,8 @@ class Sommet
         void ajouterVoisin(const Sommet*);
         void afficherData() const;
         int getDegre() const;
+        int getX() const;
+        int getY() const;
         void afficherVoisins() const;
         ///méthode de parcours en largeur du graphe à partir du sommet
         ///renvoie les prédécesseurs sous forme d'une map (clé=id du sommet,valeur=id de son prédécesseur)

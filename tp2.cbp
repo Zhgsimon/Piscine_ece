@@ -2,7 +2,7 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="tp2" />
+		<Option title="SwimmingPool_Project" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
@@ -39,6 +39,10 @@
 		<Unit filename="main.cpp" />
 		<Unit filename="sommet.cpp" />
 		<Unit filename="sommet.h" />
+		<Unit filename="svgfile.cpp" />
+		<Unit filename="svgfile.h" />
+		<Unit filename="util.cpp" />
+		<Unit filename="util.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

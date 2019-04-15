@@ -32,6 +32,14 @@ int Sommet::getDegre() const{
     return degre;
 }
 
+int Sommet::getX() const{
+    return m_x;
+}
+
+int Sommet::getY() const{
+    return m_y;
+}
+
 std::unordered_map<std::string,std::string> Sommet::parcoursBFS() const{
     Sommet*sommetpremier=new Sommet(m_id,m_x,m_y); /// on créé un sommet qui prend les valeurs de l'appelant
     sommetpremier->m_voisins=m_voisins;
