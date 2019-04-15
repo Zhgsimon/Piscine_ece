@@ -8,13 +8,14 @@
 class Arete
 {
     public:
-        Arete(std::string id, std::string sommet_depart, std::string sommet_arrive, float couts=0, float temps=0);
+        Arete(std::string id, std::string sommet_depart, std::string sommet_arrive);
+        void ajouterPoids(float poids);
+        std::vector<float>getPoids()const;
         virtual ~Arete();
 
     private:
         std::string m_id;
-        float m_couts;
-        float m_temps;
+        std::vector<float> m_poids;
         std::string m_sommet_depart;
         std::string m_sommet_arrive;
 };

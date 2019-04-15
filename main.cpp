@@ -3,7 +3,7 @@
 
 int main()
 {
-    graphe g{"cubetown.txt","cubetown_weights_0.txt"};
+    graphe g{"broadway.txt","broadway_weights_0.txt"};
     g.afficher();
     g.afficherBFS("1");
     g.afficherDFS("1");
