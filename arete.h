@@ -13,6 +13,7 @@ class Arete
         std::vector<float>getPoids()const;
         std::string getSommetDepart() const;
         std::string getSommetArrive() const;
+        std::string getId() const;
         virtual ~Arete();
 
     private:

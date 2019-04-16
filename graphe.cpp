@@ -14,6 +14,7 @@ graphe::graphe(std::string nomFichier,std::string fichierPoids){
         throw std::runtime_error("Probleme lecture ordre du graphe");
     std::string id;
     double x,y;
+    m_ordre=ordre;
     //lecture des sommets
     for (int i=0; i<ordre; ++i){
         ifs>>id; if(ifs.fail()) throw std::runtime_error("Probleme lecture données sommet");
@@ -23,6 +24,7 @@ graphe::graphe(std::string nomFichier,std::string fichierPoids){
     }
     int taille;
     ifs >> taille;
+    m_taille=taille;
     if ( ifs.fail() )
         throw std::runtime_error("Probleme lecture taille du graphe");
     std::string id_depart;
@@ -206,6 +208,29 @@ void graphe::dessiner(Svgfile& svgout) const {
         std::string id_sommetArrive = m_aretes.find(std::to_string(i))->second->getSommetArrive();
         svgout.addLine(m_sommets.find(id_sommetDepart)->second->getX(), m_sommets.find(id_sommetDepart)->second->getY(), m_sommets.find(id_sommetArrive)->second->getX(), m_sommets.find(id_sommetArrive)->second->getY(), "blue");
     }
+}
+
+std::vector<std::string> graphe::tri_croissant() const
+{
+    std::unordered_map<std::string,Arete *>::const_iterator it;
+    std::vector <std::string> vecteur_tri;
+    std::string minimum;
+    for(int i=0; i< m_taille;++i)
+    {
+        minimum=std::to_string(i);
+        for(size_t j=0;j<m_aretes.size();++j)
+        {
+            if((m_aretes.find(j))->second->getPoids<(m_aretes.find(minimum)->second->getPoids))
+            {
+                minimum=j;
+            }
+            vecteur_tri.push_back(minimum);
+        }
+
+    }
+
+
+
 }
 
 graphe::~graphe()

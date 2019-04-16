@@ -18,6 +18,10 @@ std::string Arete::getSommetDepart() const{
 std::string Arete::getSommetArrive() const{
     return m_sommet_arrive;
 }
+std::string Arete::getId() const
+{
+    return m_id;
+}
 
 Arete::~Arete()
 {
