@@ -16,6 +16,7 @@ graphe::graphe(std::string nomFichier,std::string fichierPoids){
         throw std::runtime_error("Probleme lecture ordre du graphe");
     std::string id;
     double x,y;
+    m_ordre=ordre;
     //lecture des sommets
     for (int i=0; i<ordre; ++i){
         ifs>>id; if(ifs.fail()) throw std::runtime_error("Probleme lecture données sommet");
@@ -25,6 +26,7 @@ graphe::graphe(std::string nomFichier,std::string fichierPoids){
     }
     int taille;
     ifs >> taille;
+    m_taille=taille;
     if ( ifs.fail() )
         throw std::runtime_error("Probleme lecture taille du graphe");
     std::string id_depart;
@@ -204,6 +206,7 @@ void graphe::dessiner(Svgfile& svgout) const {
         svgout.addLine(m_sommets.find(id_sommetDepart)->second->getX(), m_sommets.find(id_sommetDepart)->second->getY(), m_sommets.find(id_sommetArrive)->second->getX(), m_sommets.find(id_sommetArrive)->second->getY(), "blue");
     }
 }
+
 
 bool fonctionTri(const Arete*a1, const Arete*a2)
 {

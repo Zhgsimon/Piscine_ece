@@ -42,6 +42,8 @@ class graphe
         /// Le réseau est constitué d'une collection de sommets
         std::unordered_map<std::string,Sommet*> m_sommets;//stockée dans une map (clé=id du sommet, valeur= pointeur sur le sommet)
         std::unordered_map<std::string,Arete*> m_aretes;
+        int m_ordre;
+        int m_taille;
 };
 
 #endif // GRAPHE_H

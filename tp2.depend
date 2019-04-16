@@ -111,3 +111,128 @@
 	"util.h"
 	<windows.h>
 
+1555410303 source:c:\users\zhgsi\desktop\info\new piscine\arete.cpp
+	"arete.h"
+
+1555410304 c:\users\zhgsi\desktop\info\new piscine\arete.h
+	<string>
+	<vector>
+	<unordered_map>
+	<unordered_set>
+
+1555349189 source:c:\users\zhgsi\desktop\info\new piscine\main.cpp
+	<iostream>
+	"graphe.h"
+	"svgfile.h"
+
+1555408716 c:\users\zhgsi\desktop\info\new piscine\graphe.h
+	<string>
+	<unordered_map>
+	<vector>
+	"sommet.h"
+	"arete.h"
+	"svgfile.h"
+
+1555349189 c:\users\zhgsi\desktop\info\new piscine\sommet.h
+	<string>
+	<vector>
+	<unordered_map>
+	<unordered_set>
+	"arete.h"
+
+1555349189 c:\users\zhgsi\desktop\info\new piscine\svgfile.h
+	<string>
+	<fstream>
+	<set>
+
+1555349189 source:c:\users\zhgsi\desktop\info\new piscine\sommet.cpp
+	<iostream>
+	<queue>
+	<stack>
+	<list>
+	<unordered_map>
+	<unordered_set>
+	"sommet.h"
+	"arete.h"
+
+1555349189 source:c:\users\zhgsi\desktop\info\new piscine\svgfile.cpp
+	"svgfile.h"
+	<iostream>
+	<sstream>
+	"util.h"
+
+1555349189 c:\users\zhgsi\desktop\info\new piscine\util.h
+	<string>
+	<random>
+	<ctime>
+	<iostream>
+	<cstdio>
+
+1555349189 source:c:\users\zhgsi\desktop\info\new piscine\util.cpp
+	"util.h"
+	<random>
+	<ctime>
+	<iostream>
+	<cstdio>
+	<streambuf>
+	<vector>
+	<cstdlib>
+	<cstdio>
+	<algorithm>
+	<cstring>
+	<iostream>
+	<thread>
+	"util.h"
+	<windows.h>
+
+1555426585 source:c:\users\gauti\desktop\ece\info\project\piscine_ece\graphe.cpp
+	<fstream>
+	<iostream>
+	"graphe.h"
+	"svgfile.h"
+	<string>
+	<algorithm>
+
+1555426585 c:\users\gauti\desktop\ece\info\project\piscine_ece\graphe.h
+	<string>
+	<functional>
+	<queue>
+	<unordered_map>
+	<vector>
+	"sommet.h"
+	"arete.h"
+	"svgfile.h"
+
+1555421460 c:\users\gauti\desktop\ece\info\project\piscine_ece\sommet.h
+	<string>
+	<vector>
+	<unordered_map>
+	<unordered_set>
+	"arete.h"
+
+1555364375 c:\users\gauti\desktop\ece\info\project\piscine_ece\arete.h
+	<string>
+	<vector>
+	<unordered_map>
+	<unordered_set>
+
+1555345607 c:\users\gauti\desktop\ece\info\project\piscine_ece\svgfile.h
+	<string>
+	<fstream>
+	<set>
+
+1555425436 source:c:\users\gauti\desktop\ece\info\project\piscine_ece\main.cpp
+	<iostream>
+	"graphe.h"
+	"svgfile.h"
+
+1555421468 source:c:\users\gauti\desktop\ece\info\project\piscine_ece\sommet.cpp
+	<iostream>
+	<queue>
+	<stack>
+	<list>
+	<unordered_map>
+	<unordered_set>
+	"sommet.h"
+	"arete.h"
+
