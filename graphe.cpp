@@ -3,6 +3,8 @@
 #include "graphe.h"
 #include "svgfile.h"
 #include <string>
+#include <algorithm>
+
 
 graphe::graphe(std::string nomFichier,std::string fichierPoids){
     std::ifstream ifs{nomFichier};
@@ -57,11 +59,6 @@ graphe::graphe(std::string nomFichier,std::string fichierPoids){
         {
             ifs2>>poids1;
            (m_aretes.find(id_arete))->second->ajouterPoids(poids1);
-        }
-        std::vector<float> recup=m_aretes.find(id_arete)->second->getPoids();
-        for (int l=0;l<recup.size();++l)
-        {
-            std::cout<<recup[l]<<std::endl;
         }
     }
     ifs2.close();
@@ -205,6 +202,78 @@ void graphe::dessiner(Svgfile& svgout) const {
         std::string id_sommetDepart = m_aretes.find(std::to_string(i))->second->getSommetDepart();
         std::string id_sommetArrive = m_aretes.find(std::to_string(i))->second->getSommetArrive();
         svgout.addLine(m_sommets.find(id_sommetDepart)->second->getX(), m_sommets.find(id_sommetDepart)->second->getY(), m_sommets.find(id_sommetArrive)->second->getX(), m_sommets.find(id_sommetArrive)->second->getY(), "blue");
+    }
+}
+
+bool fonctionTri(const Arete*a1, const Arete*a2)
+{
+    return a1->getPoids() < a2->getPoids();
+}
+
+void graphe::tri(std::vector<Arete*>& vecteurTri)
+{
+    std::sort(vecteurTri.begin(),vecteurTri.end(), fonctionTri);
+}
+
+
+std::vector<Arete*> graphe::kruskal()
+{
+    ///Vector avec les id qui ont des poids danss l'ordre croissant
+    std::vector<Arete *> vect_tri_croissant;
+    std::unordered_map<std::string,Arete*>::iterator triArete;
+    //vect_tri_croissant=triCroissant();
+    std::vector<Arete *> arbre_de_poids_minimum;
+    std::unordered_map<std::string,int> Tableau_connexite;
+    std::string id_sommetDepart;
+    std::string id_sommetArrivee;
+    int i=0;
+    int j=0;
+
+    for (triArete = m_aretes.begin(); triArete != m_aretes.end(); ++triArete)
+    {
+        vect_tri_croissant.push_back(triArete->second);
+    }
+    tri(vect_tri_croissant);
+
+    for (auto it= m_sommets.begin(); it != m_sommets.end(); ++it)
+    {
+        Tableau_connexite.insert({it->second->getId(),i});
+        ++i;
+    }
+
+    while(arbre_de_poids_minimum.size()!=(m_sommets.size())-1)
+    {
+        id_sommetDepart=vect_tri_croissant[j]->getSommetDepart();
+        id_sommetArrivee=vect_tri_croissant[j]->getSommetArrive();
+        if((Tableau_connexite.find(id_sommetDepart))->second!=(Tableau_connexite.find(id_sommetArrivee)->second))
+        {
+            arbre_de_poids_minimum.push_back(vect_tri_croissant[j]);
+            int indice = Tableau_connexite[id_sommetArrivee];
+            for (int i = 0; i < Tableau_connexite.size(); ++i)
+            {
+                if (Tableau_connexite.find(std::to_string(i))->second == indice)
+                    Tableau_connexite[std::to_string(i)] = Tableau_connexite.find(id_sommetDepart)->second;
+            }
+        }
+        j++;
+    }
+    return arbre_de_poids_minimum;
+
+}
+
+void graphe::dessinerKruskal(Svgfile& svgout) {
+    std::vector<Arete *> arbre_de_poids_minimum;
+    arbre_de_poids_minimum = kruskal();
+    //svgout.addGrid(50,true,"black");
+    for (int i = 0; i < m_sommets.size(); ++i)
+    {
+        svgout.addDisk(m_sommets.find(std::to_string(i))->second->getX(), m_sommets.find(std::to_string(i))->second->getY(), 10, "black");
+    }
+    for (int i = 0; i < arbre_de_poids_minimum.size(); ++i)
+    {
+        std::string id_sommetDepart = arbre_de_poids_minimum[i]->getSommetDepart();
+        std::string id_sommetArrive = arbre_de_poids_minimum[i]->getSommetArrive();
+        svgout.addLine(m_sommets.find(id_sommetDepart)->second->getX(), m_sommets.find(id_sommetDepart)->second->getY(), m_sommets.find(id_sommetArrive)->second->getX(), m_sommets.find(id_sommetArrive)->second->getY(), "black");
     }
 }
 

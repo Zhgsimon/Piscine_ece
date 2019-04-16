@@ -23,6 +23,10 @@ void Sommet::afficherVoisins() const{
     }
 }
 
+std::string Sommet::getId() const {
+    return m_id;
+}
+
 int Sommet::getDegre() const{
     int degre=0;
     for (auto s: m_voisins) /// Pour chaque voisin on incremente la valeur de degre

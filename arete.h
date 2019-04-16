@@ -10,9 +10,10 @@ class Arete
     public:
         Arete(std::string id, std::string sommet_depart, std::string sommet_arrive);
         void ajouterPoids(float poids);
-        std::vector<float>getPoids()const;
+        float getPoids()const;
         std::string getSommetDepart() const;
         std::string getSommetArrive() const;
+        std::string getId() const;
         virtual ~Arete();
 
     private:

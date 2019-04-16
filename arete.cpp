@@ -7,8 +7,8 @@ Arete::Arete(std::string id, std::string sommet_depart, std::string sommet_arriv
 void Arete::ajouterPoids(float poids){
     m_poids.push_back(poids);
 }
-std::vector<float> Arete::getPoids()const{
-    return m_poids;
+float Arete::getPoids()const{
+    return m_poids[0];
 }
 
 std::string Arete::getSommetDepart() const{
@@ -17,6 +17,10 @@ std::string Arete::getSommetDepart() const{
 
 std::string Arete::getSommetArrive() const{
     return m_sommet_arrive;
+}
+
+std::string Arete::getId() const {
+    return m_id;
 }
 
 Arete::~Arete()

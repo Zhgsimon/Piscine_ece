@@ -1,6 +1,8 @@
 #ifndef GRAPHE_H
 #define GRAPHE_H
 #include <string>
+#include <functional>
+#include <queue>
 #include <unordered_map>
 #include <vector>
 #include "sommet.h"
@@ -24,11 +26,15 @@ class graphe
         ///lance et affiche le parcours en profondeur à partir du sommet d'identifiant id
         void afficherDFS(std::string) const;
         void dessiner(Svgfile& svgout) const;
+        void dessinerKruskal(Svgfile& svgout);
         ///recherche et affiche les composantes connexes
         ///retourne le nombre de composantes connexes
         int rechercher_afficherToutesCC() const;
         ///Détermine si un graphe admet une chaine euleriennne
         int isEulerien()const;
+        ///Arbre couvrant de poids minimum
+        void tri(std::vector<Arete*>& vecteurTri);
+        std::vector<Arete*> kruskal();
 
     protected:
 
