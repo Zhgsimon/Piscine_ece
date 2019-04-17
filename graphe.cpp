@@ -325,6 +325,10 @@ void graphe::afficherCasPossible()
         std::cout << std::endl;
     }
 }
+bool graphe::Cas_Admissibles(std::vector<Arete*>)
+{
+
+}
 
 
 graphe::~graphe()

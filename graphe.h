@@ -37,6 +37,7 @@ class graphe
         std::vector<Arete*> kruskal();
         std::vector<std::vector<std::string>> compterBinaire();
         void afficherCasPossible();
+        bool Cas_Admissibles(std::vector<Arete*>);
 
     protected:
 
