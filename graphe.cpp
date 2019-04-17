@@ -337,18 +337,31 @@ bool graphe::Cas_Admissibles(std::vector<std::string> cas_possible)
 {
     bool admissible;
     int nb_arete_cas_possible=0;
+    std::unordered_set<std::string> marquage;
+    std::string id_Sommet_Depart;
+    std::string id_Sommet_Arrive;
 
     for(size_t i=0; i<cas_possible.size(); i++)
     {
+        id_Sommet_Depart=(m_aretes.find(cas_possible[i]))->second->getSommetDepart();
+        id_Sommet_Arrive=(m_aretes.find(cas_possible[i]))->second->getSommetArrive();
+        if (marquage.find(id_Sommet_Depart)==marquage.end())
+        {
+            marquage.insert(id_Sommet_Depart);
+        }
+        if (marquage.find(id_Sommet_Arrive)==marquage.end())
+        {
+            marquage.insert(id_Sommet_Arrive);
+        }
         nb_arete_cas_possible++;
     }
-    if(nb_arete_cas_possible<=m_sommets.size()-1)
+    if(nb_arete_cas_possible>=m_sommets.size()-1&&marquage.size()==m_sommets.size())
     {
-        admissible=false;
+        admissible=true;
     }
     else
     {
-        admissible=true;
+        admissible=false;
     }
 
     return admissible;
