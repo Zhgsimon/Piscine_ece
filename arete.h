@@ -11,6 +11,7 @@ class Arete
         Arete(std::string id, std::string sommet_depart, std::string sommet_arrive);
         void ajouterPoids(float poids);
         float getPoids()const;
+        float getPoids2()const;
         std::string getSommetDepart() const;
         std::string getSommetArrive() const;
         std::string getId() const;

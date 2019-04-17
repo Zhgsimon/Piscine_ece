@@ -4,6 +4,8 @@
 #include "svgfile.h"
 #include <string>
 #include <algorithm>
+#include <bitset>
+#include <cmath>
 
 
 graphe::graphe(std::string nomFichier,std::string fichierPoids){
@@ -261,7 +263,6 @@ std::vector<Arete*> graphe::kruskal()
         j++;
     }
     return arbre_de_poids_minimum;
-
 }
 
 void graphe::dessinerKruskal(Svgfile& svgout) {
@@ -279,6 +280,52 @@ void graphe::dessinerKruskal(Svgfile& svgout) {
         svgout.addLine(m_sommets.find(id_sommetDepart)->second->getX(), m_sommets.find(id_sommetDepart)->second->getY(), m_sommets.find(id_sommetArrive)->second->getX(), m_sommets.find(id_sommetArrive)->second->getY(), "black");
     }
 }
+
+std::vector<std::vector<std::string>> graphe::compterBinaire(){
+    double nb_depart = pow(2.0,m_aretes.size());
+    std::vector<std::vector<std::string>> casPossible(nb_depart);
+    for (int i=0; i < nb_depart; ++i)
+    {
+        int a = i;
+        for (int j = m_aretes.size(); j >= 0; --j)
+        {
+            if (a >= pow(2,j))
+            {
+                casPossible[i].push_back(std::to_string(j));
+                a = a - pow(2,j);
+            }
+        }
+    }
+    return casPossible;
+}
+
+void graphe::afficherCasPossible()
+{
+    std::vector<std::vector<std::string>> recup;
+    std::vector<float> recupPoids;
+    std::unordered_map<std::string,std::vector<float>> conteneurCasPossible;
+    recup = compterBinaire();
+    int compteur=0;
+    for (size_t i=1; i< recup.size(); ++i)
+    {
+        float poidsTotal=0;
+        float poidsTotal2=0;
+        std::cout << "Cas "<<compteur<<" : ";
+        for (size_t j=0; j < recup[i].size(); ++j)
+        {
+             std::cout << recup[i][j] <<"  " ;
+             poidsTotal = poidsTotal + m_aretes.find(recup[i][j])->second->getPoids();
+             poidsTotal2 = poidsTotal2 + m_aretes.find(recup[i][j])->second->getPoids2();
+             recupPoids.push_back(poidsTotal);
+             recupPoids.push_back(poidsTotal2);
+        }
+
+        std::cout <<"Poids Total : " << "(" <<poidsTotal<<","<<poidsTotal2<<")";
+        compteur++;
+        std::cout << std::endl;
+    }
+}
+
 
 graphe::~graphe()
 {

@@ -7,9 +7,10 @@ int main()
     Svgfile svgout;
     std::vector<Arete*> q2;
     int got;
-    graphe g{"manhattan.txt","manhattan_weights_0.txt"};
-    q2=g.kruskal();
+    graphe g{"cubetown.txt","cubetown_weights_0.txt"};
+    //q2=g.kruskal();
     g.dessinerKruskal(svgout);
+    g.afficherCasPossible();
     for (got = 0; got < q2.size(); ++ got)
         std::cout << q2[got]->getId() << std::endl;
     /*

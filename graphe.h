@@ -35,6 +35,8 @@ class graphe
         ///Arbre couvrant de poids minimum
         void tri(std::vector<Arete*>& vecteurTri);
         std::vector<Arete*> kruskal();
+        std::vector<std::vector<std::string>> compterBinaire();
+        void afficherCasPossible();
 
     protected:
 
