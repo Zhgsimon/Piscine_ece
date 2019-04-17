@@ -306,28 +306,52 @@ void graphe::afficherCasPossible()
     std::unordered_map<std::string,std::vector<float>> conteneurCasPossible;
     recup = compterBinaire();
     int compteur=0;
-    for (size_t i=1; i< recup.size(); ++i)
+    bool admissible;
+    for (size_t i=0; i< recup.size(); ++i)
     {
         float poidsTotal=0;
         float poidsTotal2=0;
         std::cout << "Cas "<<compteur<<" : ";
         for (size_t j=0; j < recup[i].size(); ++j)
         {
-             std::cout << recup[i][j] <<"  " ;
-             poidsTotal = poidsTotal + m_aretes.find(recup[i][j])->second->getPoids();
-             poidsTotal2 = poidsTotal2 + m_aretes.find(recup[i][j])->second->getPoids2();
-             recupPoids.push_back(poidsTotal);
-             recupPoids.push_back(poidsTotal2);
+             admissible=Cas_Admissibles(recup[i]);
+             if (admissible==true)
+             {
+                std::cout << recup[i][j] <<"  " ;
+                poidsTotal = poidsTotal + m_aretes.find(recup[i][j])->second->getPoids();
+                poidsTotal2 = poidsTotal2 + m_aretes.find(recup[i][j])->second->getPoids2();
+                recupPoids.push_back(poidsTotal);
+                recupPoids.push_back(poidsTotal2);
+             }
+
         }
 
         std::cout <<"Poids Total : " << "(" <<poidsTotal<<","<<poidsTotal2<<")";
         compteur++;
+
         std::cout << std::endl;
     }
-}
-bool graphe::Cas_Admissibles(std::vector<Arete*>)
-{
 
+}
+bool graphe::Cas_Admissibles(std::vector<std::string> cas_possible)
+{
+    bool admissible;
+    int nb_arete_cas_possible=0;
+
+    for(size_t i=0; i<cas_possible.size(); i++)
+    {
+        nb_arete_cas_possible++;
+    }
+    if(nb_arete_cas_possible<=m_sommets.size()-1)
+    {
+        admissible=false;
+    }
+    else
+    {
+        admissible=true;
+    }
+
+    return admissible;
 }
 
 
