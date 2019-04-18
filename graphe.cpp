@@ -360,6 +360,7 @@ void graphe::afficherCasPossible(Svgfile& svgout)
         compteur++;
         //std::cout << std::endl;
     }
+    std::cout<<conteneurCasPossible.size()<<std::endl;
     std::cout << "ok";
     for (var1 = conteneurCasPossible.begin(); var1 != conteneurCasPossible.end(); var1++)
     {
@@ -398,40 +399,37 @@ void graphe::partie3 (Svgfile& svgout){
     float recipient=0;
     std::unordered_map<int,std::vector<float>>::iterator var1;
     std::unordered_map<int,std::vector<float>>::iterator var2;
-    for (size_t i=0; i< 5; ++i)
+    for (size_t i=0; i< recup.size(); ++i)
     {
         float poidsTotal=0;
         float poidsTotal2=0;
-        //std::cout << "Cas "<<compteur<<" : ";
+        std::cout << "Cas "<<compteur<<" : ";
         for (size_t j=0; j < recup[i].size(); ++j)
         {
              std::cout << recup[i][j] <<"  " ;
              poidsTotal = poidsTotal + m_aretes.find(recup[i][j])->second->getPoids();
-             for (int k=0; k < m_sommets.size(); ++k)
-                {
-                    for (int l=0; l < recup[i].size(); ++l)
-                    {
-                    recipient = Dijkstra(k,recup[i])[l];
-                    poidsTotal2 = poidsTotal2 + recipient;
-                    }
-                }
         }
-        printf("%f\n",poidsTotal2);
+        for (int k=0; k < m_sommets.size(); ++k)
+        {
+                poidsTotal2 = poidsTotal2 + Dijkstra(k,recup[i]);
+        }
+        //printf("__%f___\n",poidsTotal2);
+        //std::cout<<std::endl;
         recupPoids.push_back(poidsTotal);
         recupPoids.push_back(poidsTotal2);
         if (Cas_Admissibles(recup[i]) == true)
             conteneurCasPossible.insert({compteur,recupPoids});
         recupPoids.clear();
-        //std::cout <<"Poids Total : " << "(" <<poidsTotal<<","<<poidsTotal2<<")";
+        std::cout <<"Poids Total : " << "(" <<poidsTotal<<","<<poidsTotal2<<")";
         compteur++;
-        //std::cout << std::endl;
+        std::cout << std::endl;
     }
     std::cout << "ok";
     for (var1 = conteneurCasPossible.begin(); var1 != conteneurCasPossible.end(); var1++)
     {
         for (var2 = conteneurCasPossible.begin(); var2 != conteneurCasPossible.end(); var2++)
         {
-            if (var1->second[0] < var2->second[0] && var1->second[1] < var2->second[1])
+            if (var1->second[0] <= var2->second[0] && var1->second[1] <= var2->second[1])
             {
                 svgout.addDisk(var2->second[0]*10,600-var2->second[1]*10,5,"red");
                 conteneurCasPossible.erase(var2);
@@ -445,29 +443,29 @@ void graphe::partie3 (Svgfile& svgout){
 }
 
 
-std::vector<float> graphe::Dijkstra(int idSommet , std::vector<std::string> casActuel)
+float graphe::Dijkstra(int idSommet , std::vector<std::string> casActuel)
 {
     std::vector<float> Distances(m_sommets.size());
-    for(float i=0;i<m_sommets.size();i++) //Set initial distances to Infinity
+    float recuppoids=0;
+    float distanceTotale=0;
+    for(float i=0;i<m_sommets.size();i++)
         Distances[i]=10000000.0;
     Distances[idSommet] = 0;
-    Sommet*sommetpremier=new Sommet(std::to_string(idSommet),0,0);
-    for (int i=0;i<m_sommets.find(std::to_string(idSommet))->second->getVoisins().size();++i)
-        sommetpremier->ajouterVoisin(m_sommets.find(std::to_string(idSommet))->second->getVoisins()[i]);
     std::unordered_set< std::string > marquage;
     std::priority_queue< std::pair <std::string,float>, std::vector< std::pair <std::string,float> >, prioritize > file;
-    marquage.insert(sommetpremier->getId());
     file.push(make_pair(std::to_string(idSommet),0));
     while(!file.empty())
     {
         std::pair<std::string, float> curr = file.top();
         marquage.insert({curr.first});
         file.pop();
-        std::string v = curr.first;                                                      // get the index of the nearest node
+        std::string v = curr.first;
         float w = curr.second;
         for (int i = 0; i < m_sommets.find(curr.first)->second->getVoisins().size(); ++i)
         {
+            recuppoids=0;
             Sommet* it = m_sommets.find(curr.first)->second->getVoisins()[i];
+            //std::cout<<m_sommets.find(curr.first)->second->getVoisins().size();
             std::unordered_set<std::string>::const_iterator got = marquage.find (it->getId());
             if (got == marquage.end())
             {
@@ -477,23 +475,25 @@ std::vector<float> graphe::Dijkstra(int idSommet , std::vector<std::string> casA
                     std::string sommetArrive = m_aretes.find(casActuel[j])->second->getSommetArrive();
                     std::string sommetDepart2 = m_aretes.find(casActuel[j])->second->getSommetArrive();
                     std::string sommetArrive2 = m_aretes.find(casActuel[j])->second->getSommetDepart();
-                    if (sommetDepart == curr.first && sommetArrive == it->getId() || sommetDepart2 == curr.first && sommetArrive2 == it->getId())
+                    //std::cout << casActuel.size();
+                    //std::cout << sommetDepart << "___" << curr.first << "     "<<sommetArrive<<"___"<<it->getId()<<std::endl;
+                    if ((sommetDepart == curr.first && sommetArrive == it->getId()) || (sommetDepart2 == curr.first && sommetArrive2 == it->getId()))
                     {
-                        float recuppoids = m_aretes.find(casActuel[j])->second->getPoids2();
-                        float g = std::stof(v);
-                        float h = std::stof(it->getId());
-                        if (Distances[g] + recuppoids < Distances[h])
+                        recuppoids = m_aretes.find(casActuel[j])->second->getPoids2();
+                        if ( w + recuppoids < Distances[std::stof(it->getId())])
                         {
-                            Distances[std::stof(it->getId())] =  Distances[std::stof(v)] + recuppoids ;
+                            //std::cout<<w<<std::endl;
+                            Distances[std::stof(it->getId())] =  w + recuppoids ;
                             file.push(make_pair(it->getId(),Distances[std::stof(it->getId())]));
+                            distanceTotale += Distances[std::stof(it->getId())];
+                            //printf("_%f_",Distances[std::stof(it->getId())]);
                         }
                     }
                 }
             }
         }
     }
-    delete sommetpremier;
-    return Distances;
+    return distanceTotale;
 }
 
 ///Dans le sous prog compterBinaire verifier si le vecteur dans le vecteur de vecteur si ce vecteur est non connexe (sous prog de simon et nico ) et le supprimer du vecteur si inutile (erase)

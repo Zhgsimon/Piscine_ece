@@ -94,7 +94,7 @@ class graphe
         */
 
         bool Cas_Admissibles(std::vector<std::string> cas_possible);
-        std::vector<float> Dijkstra(int idSommet, std::vector<std::string> casActuel);
+        float Dijkstra(int idSommet, std::vector<std::string> casActuel);
         void partie3 (Svgfile& svgout);
 
     protected:
