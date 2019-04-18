@@ -11,11 +11,12 @@ class Sommet
     public:
         ///constructeur qui reçoit en params les données du sommet
         Sommet(std::string,double,double);
-        void ajouterVoisin(const Sommet*);
+        void ajouterVoisin(Sommet*);
         void afficherData() const;
         int getDegre() const;
         int getX() const;
         int getY() const;
+        std::vector<Sommet*> getVoisins();
         std::string getId() const;
         void afficherVoisins() const;
         ///méthode de parcours en largeur du graphe à partir du sommet
@@ -32,7 +33,7 @@ class Sommet
 
     private:
         /// Voisinage : liste d'adjacence
-        std::vector<const Sommet*> m_voisins;
+        std::vector<Sommet*> m_voisins;
         /// Données spécifiques du sommet
         std::string m_id; // Identifiant
         double m_x, m_y; // Position

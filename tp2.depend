@@ -185,7 +185,7 @@
 	"util.h"
 	<windows.h>
 
-1555490338 source:c:\users\gauti\desktop\ece\info\project\piscine_ece\graphe.cpp
+1555597009 source:c:\users\gauti\desktop\ece\info\project\piscine_ece\graphe.cpp
 	<fstream>
 	<iostream>
 	"graphe.h"
@@ -194,8 +194,9 @@
 	<algorithm>
 	<bitset>
 	<cmath>
+	<limits>
 
-1555489541 c:\users\gauti\desktop\ece\info\project\piscine_ece\graphe.h
+1555594065 c:\users\gauti\desktop\ece\info\project\piscine_ece\graphe.h
 	<string>
 	<functional>
 	<queue>
@@ -204,8 +205,9 @@
 	"sommet.h"
 	"arete.h"
 	"svgfile.h"
+	<limits>
 
-1555421460 c:\users\gauti\desktop\ece\info\project\piscine_ece\sommet.h
+1555515114 c:\users\gauti\desktop\ece\info\project\piscine_ece\sommet.h
 	<string>
 	<vector>
 	<unordered_map>
@@ -218,17 +220,17 @@
 	<unordered_map>
 	<unordered_set>
 
-1555345607 c:\users\gauti\desktop\ece\info\project\piscine_ece\svgfile.h
+1555493911 c:\users\gauti\desktop\ece\info\project\piscine_ece\svgfile.h
 	<string>
 	<fstream>
 	<set>
 
-1555490282 source:c:\users\gauti\desktop\ece\info\project\piscine_ece\main.cpp
+1555594118 source:c:\users\gauti\desktop\ece\info\project\piscine_ece\main.cpp
 	<iostream>
 	"graphe.h"
 	"svgfile.h"
 
-1555421468 source:c:\users\gauti\desktop\ece\info\project\piscine_ece\sommet.cpp
+1555576024 source:c:\users\gauti\desktop\ece\info\project\piscine_ece\sommet.cpp
 	<iostream>
 	<queue>
 	<stack>

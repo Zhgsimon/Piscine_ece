@@ -5,14 +5,12 @@
 int main()
 {
     Svgfile svgout;
-    std::vector<Arete*> q2;
-    int got;
-    graphe g{"cubetown.txt","cubetown_weights_0.txt"};
+
+    graphe g{"broadway.txt","broadway_weights_0.txt"};
     //q2=g.kruskal();
-    g.dessinerKruskal(svgout);
-    g.afficherCasPossible();
-    for (got = 0; got < q2.size(); ++ got)
-        std::cout << q2[got]->getId() << std::endl;
+    //g.dessinerKruskal(svgout);
+    //g.afficherCasPossible(svgout);
+    g.partie3(svgout);
     /*
     int ncc=g.rechercher_afficherToutesCC();
     std::cout<<"Nombre de composantes connexes: "<<ncc<<std::endl;

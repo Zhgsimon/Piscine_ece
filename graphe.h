@@ -8,6 +8,7 @@
 #include "sommet.h"
 #include "arete.h"
 #include "svgfile.h"
+#include <limits>
 
 class graphe
 {
@@ -36,7 +37,10 @@ class graphe
         void tri(std::vector<Arete*>& vecteurTri);
         std::vector<Arete*> kruskal();
         std::vector<std::vector<std::string>> compterBinaire();
-        void afficherCasPossible();
+        void afficherCasPossible(Svgfile& svgout);
+        bool Cas_Admissibles(std::vector<std::string> cas_possible);
+        std::vector<float> Dijkstra(int idSommet, std::vector<std::string> casActuel);
+        void partie3 (Svgfile& svgout);
 
     protected:
 

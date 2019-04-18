@@ -6,6 +6,8 @@
 #include <algorithm>
 #include <bitset>
 #include <cmath>
+#define INF INT_MAX ///INFINITE
+#include <limits>
 
 
 graphe::graphe(std::string nomFichier,std::string fichierPoids){
@@ -299,33 +301,202 @@ std::vector<std::vector<std::string>> graphe::compterBinaire(){
     return casPossible;
 }
 
-void graphe::afficherCasPossible()
+bool graphe::Cas_Admissibles(std::vector<std::string> cas_possible)
+{
+    bool admissible;
+    std::unordered_set<std::string> marquage;
+    std::vector<std::string>::iterator i;
+    for(i = cas_possible.begin(); i != cas_possible.end(); i++)
+    {
+        std::string recupSommetDepart = m_aretes.find(*i)->second->getSommetDepart();
+        std::unordered_set<std::string>::const_iterator got = marquage.find (recupSommetDepart);
+        if (got == marquage.end())
+            marquage.insert(recupSommetDepart);
+
+        std::string recupSommetArrive = m_aretes.find(*i)->second->getSommetArrive();
+        std::unordered_set<std::string>::const_iterator get = marquage.find (recupSommetArrive);
+        if (get == marquage.end())
+            marquage.insert(recupSommetArrive);
+    }
+    if(cas_possible.size()>=m_sommets.size()-1 && marquage.size()== m_sommets.size())
+    {
+        admissible=true;
+    }
+
+    else
+    {
+        admissible=false;
+    }
+
+    return admissible;
+}
+
+void graphe::afficherCasPossible(Svgfile& svgout)
 {
     std::vector<std::vector<std::string>> recup;
     std::vector<float> recupPoids;
-    std::unordered_map<std::string,std::vector<float>> conteneurCasPossible;
+    std::unordered_map<int,std::vector<float>> conteneurCasPossible;
     recup = compterBinaire();
     int compteur=0;
-    for (size_t i=1; i< recup.size(); ++i)
+    std::unordered_map<int,std::vector<float>>::iterator var1;
+    std::unordered_map<int,std::vector<float>>::iterator var2;
+    for (size_t i=0; i< recup.size(); ++i)
     {
         float poidsTotal=0;
         float poidsTotal2=0;
-        std::cout << "Cas "<<compteur<<" : ";
+        //std::cout << "Cas "<<compteur<<" : ";
+        for (size_t j=0; j < recup[i].size(); ++j)
+        {
+             //std::cout << recup[i][j] <<"  " ;
+             poidsTotal = poidsTotal + m_aretes.find(recup[i][j])->second->getPoids();
+             poidsTotal2 = poidsTotal2 + m_aretes.find(recup[i][j])->second->getPoids2();
+        }
+        recupPoids.push_back(poidsTotal);
+        recupPoids.push_back(poidsTotal2);
+        if (Cas_Admissibles(recup[i]) == true)
+            conteneurCasPossible.insert({compteur,recupPoids});
+        recupPoids.clear();
+        //std::cout <<"Poids Total : " << "(" <<poidsTotal<<","<<poidsTotal2<<")";
+        compteur++;
+        //std::cout << std::endl;
+    }
+    std::cout << "ok";
+    for (var1 = conteneurCasPossible.begin(); var1 != conteneurCasPossible.end(); var1++)
+    {
+        for (var2 = conteneurCasPossible.begin(); var2 != conteneurCasPossible.end(); var2++)
+        {
+            if (var1->second[0] < var2->second[0] && var1->second[1] < var2->second[1])
+            {
+                svgout.addDisk(var2->second[0]*10,600-var2->second[1]*10,5,"red");
+                conteneurCasPossible.erase(var2);
+            }
+        }
+    }
+    for (var1 = conteneurCasPossible.begin(); var1 != conteneurCasPossible.end(); var1++)
+    {
+        svgout.addDisk(var1->second[0]*10,600-var1->second[1]*10,5,"green");
+    }
+}
+
+bool triPoidsArete(const Arete*a1, const Arete*a2)
+{
+    return a1->getPoids() < a2->getPoids();
+}
+
+class prioritize{
+    public: bool operator ()(std::pair<std::string, float>&p1 ,std::pair<std::string, float>&p2){
+        return p1.second>p2.second;
+        }
+};
+
+void graphe::partie3 (Svgfile& svgout){
+    std::vector<std::vector<std::string>> recup;
+    std::vector<float> recupPoids;
+    std::unordered_map<int,std::vector<float>> conteneurCasPossible;
+    recup = compterBinaire();
+    int compteur=0;
+    float recipient=0;
+    std::unordered_map<int,std::vector<float>>::iterator var1;
+    std::unordered_map<int,std::vector<float>>::iterator var2;
+    for (size_t i=0; i< 5; ++i)
+    {
+        float poidsTotal=0;
+        float poidsTotal2=0;
+        //std::cout << "Cas "<<compteur<<" : ";
         for (size_t j=0; j < recup[i].size(); ++j)
         {
              std::cout << recup[i][j] <<"  " ;
              poidsTotal = poidsTotal + m_aretes.find(recup[i][j])->second->getPoids();
-             poidsTotal2 = poidsTotal2 + m_aretes.find(recup[i][j])->second->getPoids2();
-             recupPoids.push_back(poidsTotal);
-             recupPoids.push_back(poidsTotal2);
+             for (int k=0; k < m_sommets.size(); ++k)
+                {
+                    for (int l=0; l < recup[i].size(); ++l)
+                    {
+                    recipient = Dijkstra(k,recup[i])[l];
+                    poidsTotal2 = poidsTotal2 + recipient;
+                    }
+                }
         }
-
-        std::cout <<"Poids Total : " << "(" <<poidsTotal<<","<<poidsTotal2<<")";
+        printf("%f\n",poidsTotal2);
+        recupPoids.push_back(poidsTotal);
+        recupPoids.push_back(poidsTotal2);
+        if (Cas_Admissibles(recup[i]) == true)
+            conteneurCasPossible.insert({compteur,recupPoids});
+        recupPoids.clear();
+        //std::cout <<"Poids Total : " << "(" <<poidsTotal<<","<<poidsTotal2<<")";
         compteur++;
-        std::cout << std::endl;
+        //std::cout << std::endl;
+    }
+    std::cout << "ok";
+    for (var1 = conteneurCasPossible.begin(); var1 != conteneurCasPossible.end(); var1++)
+    {
+        for (var2 = conteneurCasPossible.begin(); var2 != conteneurCasPossible.end(); var2++)
+        {
+            if (var1->second[0] < var2->second[0] && var1->second[1] < var2->second[1])
+            {
+                svgout.addDisk(var2->second[0]*10,600-var2->second[1]*10,5,"red");
+                conteneurCasPossible.erase(var2);
+            }
+        }
+    }
+    for (var1 = conteneurCasPossible.begin(); var1 != conteneurCasPossible.end(); var1++)
+    {
+        svgout.addDisk(var1->second[0]*10,600-var1->second[1]*10,5,"green");
     }
 }
 
+
+std::vector<float> graphe::Dijkstra(int idSommet , std::vector<std::string> casActuel)
+{
+    std::vector<float> Distances(m_sommets.size());
+    for(float i=0;i<m_sommets.size();i++) //Set initial distances to Infinity
+        Distances[i]=10000000.0;
+    Distances[idSommet] = 0;
+    Sommet*sommetpremier=new Sommet(std::to_string(idSommet),0,0);
+    for (int i=0;i<m_sommets.find(std::to_string(idSommet))->second->getVoisins().size();++i)
+        sommetpremier->ajouterVoisin(m_sommets.find(std::to_string(idSommet))->second->getVoisins()[i]);
+    std::unordered_set< std::string > marquage;
+    std::priority_queue< std::pair <std::string,float>, std::vector< std::pair <std::string,float> >, prioritize > file;
+    marquage.insert(sommetpremier->getId());
+    file.push(make_pair(std::to_string(idSommet),0));
+    while(!file.empty())
+    {
+        std::pair<std::string, float> curr = file.top();
+        marquage.insert({curr.first});
+        file.pop();
+        std::string v = curr.first;                                                      // get the index of the nearest node
+        float w = curr.second;
+        for (int i = 0; i < m_sommets.find(curr.first)->second->getVoisins().size(); ++i)
+        {
+            Sommet* it = m_sommets.find(curr.first)->second->getVoisins()[i];
+            std::unordered_set<std::string>::const_iterator got = marquage.find (it->getId());
+            if (got == marquage.end())
+            {
+                for (int j=0; j < casActuel.size();++j)
+                {
+                    std::string sommetDepart = m_aretes.find(casActuel[j])->second->getSommetDepart();
+                    std::string sommetArrive = m_aretes.find(casActuel[j])->second->getSommetArrive();
+                    std::string sommetDepart2 = m_aretes.find(casActuel[j])->second->getSommetArrive();
+                    std::string sommetArrive2 = m_aretes.find(casActuel[j])->second->getSommetDepart();
+                    if (sommetDepart == curr.first && sommetArrive == it->getId() || sommetDepart2 == curr.first && sommetArrive2 == it->getId())
+                    {
+                        float recuppoids = m_aretes.find(casActuel[j])->second->getPoids2();
+                        float g = std::stof(v);
+                        float h = std::stof(it->getId());
+                        if (Distances[g] + recuppoids < Distances[h])
+                        {
+                            Distances[std::stof(it->getId())] =  Distances[std::stof(v)] + recuppoids ;
+                            file.push(make_pair(it->getId(),Distances[std::stof(it->getId())]));
+                        }
+                    }
+                }
+            }
+        }
+    }
+    delete sommetpremier;
+    return Distances;
+}
+
+///Dans le sous prog compterBinaire verifier si le vecteur dans le vecteur de vecteur si ce vecteur est non connexe (sous prog de simon et nico ) et le supprimer du vecteur si inutile (erase)
 
 graphe::~graphe()
 {
