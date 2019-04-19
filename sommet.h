@@ -16,8 +16,8 @@
 
 /*!
 * \class Sommet
-* \brief classe représentant le sommet
-* La classe gère le stockage et les traitements du sommet
+* \brief classe representant le sommet
+* La classe gere le stockage et les traitements du sommet
 */
 
 class Sommet
@@ -36,19 +36,25 @@ class Sommet
 
         Sommet(std::string,double,double);
         void ajouterVoisin(Sommet*);
+
+        /*!
+        * \brief Affichage des donnees Sommet
+        * affichage de l'identifiant et de la position d'un sommet
+        */
+
         void afficherData() const;
 
         /*!
-        * \brief Obtention du degré du sommet
-        * Méthode qui permet d'obtenir le nombre de sommets adjacents au sommet
-        * \return un entier qui correspond au degré du sommet
+        * \brief Obtention du degre du sommet
+        * Methode qui permet d'obtenir le nombre de sommets adjacents au sommet
+        * \return un entier qui correspond au degre du sommet
         */
 
         int getDegre() const;
 
         /*!
         * \brief Obtention du x du sommet
-        * Méthode qui permet d'obtenir la position en abscisse du sommet
+        * Methode qui permet d'obtenir la position en abscisse du sommet
         * \return un float qui correspond à l'abscisse du sommet
         */
 
@@ -56,15 +62,15 @@ class Sommet
 
         /*!
         * \brief Obtention du y du sommet
-        * Méthode qui permet d'obtenir la position en ordonnée du sommet
-        * \return un float qui correspond à l'ordonnée du sommet
+        * Méthode qui permet d'obtenir la position en ordonnee du sommet
+        * \return un float qui correspond à l'ordonnee du sommet
         */
 
         int getY() const;
 
         /*!
         * \brief Obtention des voisins
-        * Méthode qui permet d'obtenir l'ensemble des voisins d'un sommet
+        * Methode qui permet d'obtenir l'ensemble des voisins d'un sommet
         * \return un vector de Sommet* qui correspond aux voisins du sommet
         */
 
@@ -72,12 +78,19 @@ class Sommet
 
         /*!
         * \brief Obtention de l'ID du sommet
-        * Méthode qui permet d'obtenir l'identifiant du sommet
-        * \return une chaine de caractères qui correspond à l'identifiant sommet
+        * Methode qui permet d'obtenir l'identifiant du sommet
+        * \return une chaine de caracteres qui correspond à l'identifiant sommet
         */
 
         std::string getId() const;
+
+        /*!
+        * \brief affichage voisisns console
+        * Affichage des voisins d'un sommet en console avec toutes ses composantes (id + positions)
+        */
         void afficherVoisins() const;
+
+
         ///méthode de parcours en largeur du graphe à partir du sommet
         ///renvoie les prédécesseurs sous forme d'une map (clé=id du sommet,valeur=id de son prédécesseur)
         std::unordered_map<std::string,std::string> parcoursBFS() const;
@@ -86,18 +99,21 @@ class Sommet
         ///méthode qui recherche la composante connexe du sommet
         ///renvoie la liste des ids des sommets de la composante
         std::unordered_set<std::string> rechercherCC() const;
+
+
         /*!
         * \brief Destructeur
         * Destructeur de la classe Sommet
         */
+
         ~Sommet();
 
     protected:
 
         private:
         /// Voisinage : liste d'adjacence
-        std::vector<Sommet*> m_voisins; /*!< Tous les sommets voisins du sommets sont stockés dans une map (valeur= pointeur sur le sommet voisin)*/
-        /// Données spécifiques du sommet
+        std::vector<Sommet*> m_voisins; /*!< Tous les sommets voisins du sommets sont stockes dans une map (valeur= pointeur sur le sommet voisin)*/
+        /// Donnees specifiques du sommet
         std::string m_id; /*!< Identifiant du sommet*/
         double m_x, m_y; /*!< Position du sommet */
 

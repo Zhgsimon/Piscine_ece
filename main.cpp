@@ -5,7 +5,9 @@
 int main()
 {
     int choix;
+   /* bool orient= false;
 
+    std::string choixorientation;*/
     std::string fichierchoisi;
     std:: string extension1=".txt";
     std::string extension2="_weights_0.txt";
@@ -15,6 +17,15 @@ int main()
     std::cin>>fichierchoisi;
     nomfichierchoisi= fichierchoisi+extension1;
     nomfichierpoids=fichierchoisi+extension2;
+
+    /*std::cout<<" voulez-vous un graphe orienté ?"<<std::endl;
+    std::cout<<" oui / non "<<std::endl;
+    std::cin>> choixorientation;
+    if ( choixorientation == "oui")
+    {
+        orient = true;
+        std::cout<<orient<<std::endl;
+    }*/
     graphe g{nomfichierchoisi,nomfichierpoids};
     do
     {

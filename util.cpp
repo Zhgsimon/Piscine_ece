@@ -78,11 +78,14 @@ PARTIE INTERFACE (pas dans le .h pour ne pas polluer)
 ///                         préfixer par 0x, exemple 0x1a vert sur fond bleu)
 short autoCinWinCouleur = 0x0a;
 
+
+
 struct FILE_buffer_style
 {
     size_t tempo_;
     short color_;
 };
+
 
 class FILE_buffer : public std::streambuf
 {

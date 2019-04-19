@@ -1,0 +1,7 @@
+digraph "graphe"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="{graphe\n|- m_sommets\l- m_aretes\l- m_ordre\l- m_taille\l|+ graphe()\l+ ~graphe()\l+ afficher()\l+ parcoursBFS()\l+ afficherBFS()\l+ parcoursDFS()\l+ afficherDFS()\l+ dessiner()\l+ dessinerKruskal()\l+ rechercher_afficherToutesCC()\let 8 de plus...\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="classe représentant le graphe La classe gère le stockage et les traitements d'un graphe"];
+}

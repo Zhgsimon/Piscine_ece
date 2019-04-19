@@ -1,0 +1,7 @@
+digraph "Svgfile"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="{Svgfile\n|+ s_verbose\l- m_filename\l- m_ostrm\l- m_width\l- m_height\l- s_openfiles\l|+ Svgfile()\l+ ~Svgfile()\l+ addCloud()\l+ addDisk()\l+ addCircle()\l+ addEllipse()\l+ addTriangle()\l+ addTriangle()\l+ addLine()\l+ addLineEp()\let 12 de plus...\l+ makeRGB()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+}

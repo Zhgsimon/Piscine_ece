@@ -1,0 +1,7 @@
+digraph "Sommet"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="{Sommet\n|- m_voisins\l- m_id\l- m_x\l- m_y\l|+ Sommet()\l+ ajouterVoisin()\l+ afficherData()\l+ getDegre()\l+ getX()\l+ getY()\l+ getVoisins()\l+ getId()\l+ afficherVoisins()\l+ parcoursBFS()\l+ parcoursDFS()\l+ rechercherCC()\l+ ~Sommet()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="classe représentant le sommet La classe gère le stockage et les traitements du sommet"];
+}

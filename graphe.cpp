@@ -388,9 +388,26 @@ bool triPoidsArete(const Arete*a1, const Arete*a2)
     return a1->getPoids() < a2->getPoids();
 }
 
+/*! \class prioritize
+*
+*\ brief Classe tri priority queue
+*
+* Comparaison des deux poids
+*/
+
 class prioritize{
-    public: bool operator ()(std::pair<std::string, float>&p1 ,std::pair<std::string, float>&p2){
-        return p1.second>p2.second;
+    public:
+        /*!
+        * \brief Operateur comparaison
+        *
+        * \param &p1 : première paire avec une chaine de caracteres et un float
+        * \param &p2 : deuxieme paire avec une chaine de caracteres et un float
+        *
+        * \return un bool pour connaitre le plus grand
+        */
+        bool operator ()(std::pair<std::string, float>&p1 ,std::pair<std::string, float>&p2)
+        {
+            return p1.second>p2.second;
         }
 };
 
@@ -407,10 +424,10 @@ void graphe::partie3 (Svgfile& svgout){
     {
         float poidsTotal=0;
         float poidsTotal2=0;
-        std::cout << "Cas "<<compteur<<" : ";
+        //std::cout << "Cas "<<compteur<<" : ";
         for (size_t j=0; j < recup[i].size(); ++j)
         {
-             std::cout << recup[i][j] <<"  " ;
+             //std::cout << recup[i][j] <<"  " ;
              poidsTotal = poidsTotal + m_aretes.find(recup[i][j])->second->getPoids();
         }
         for (int k=0; k < m_sommets.size(); ++k)
@@ -422,9 +439,9 @@ void graphe::partie3 (Svgfile& svgout){
         if (Cas_Admissibles(recup[i]) == true)
             conteneurCasPossible.insert({compteur,recupPoids});
         recupPoids.clear();
-        std::cout <<"Poids Total : " << "(" <<poidsTotal<<","<<poidsTotal2<<")";
+        //std::cout <<"Poids Total : " << "(" <<poidsTotal<<","<<poidsTotal2<<")";
         compteur++;
-        std::cout << std::endl;
+        //std::cout << std::endl;
     }
     std::cout << "ok";
     svgout.addLine(10,400,300,400,"black");
@@ -439,7 +456,7 @@ void graphe::partie3 (Svgfile& svgout){
             }
         }
     }
-    std::cout << conteneurCasPossible.size() << std::endl;
+    //std::cout << conteneurCasPossible.size() << std::endl;
     for (var1 = conteneurCasPossible.begin(); var1 != conteneurCasPossible.end(); var1++)
     {
         svgout.addDisk(var1->second[0]*10,600-var1->second[1],5,"green");
@@ -497,6 +514,7 @@ float graphe::Dijkstra(int idSommet , std::vector<std::string> casActuel)
     }
     return distanceTotale;
 }
+
 
 ///Dans le sous prog compterBinaire verifier si le vecteur dans le vecteur de vecteur si ce vecteur est non connexe (sous prog de simon et nico ) et le supprimer du vecteur si inutile (erase)
 
