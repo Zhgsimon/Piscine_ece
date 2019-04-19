@@ -5,7 +5,7 @@
 int main()
 {
     int choix;
-    graphe g{"broadway.txt","broadway_weights_0.txt"};
+    graphe g{"cubetown.txt","cubetown_weights_0.txt"};
     do
     {
         std::cout<<"------Bienvenue dans votre generateur------"<<std::endl;
@@ -34,7 +34,7 @@ int main()
         case 2:
             {
                 Svgfile svgout;
-                //g.afficherCasPossible(svgout); en enlevant les commentaires
+                g.afficherCasPossible(svgout);
                 break;
             }
         case 3:
