@@ -5,7 +5,16 @@
 int main()
 {
     int choix;
-    graphe g{"manhattan.txt","manhattan_weights_0.txt"};
+    std::string fichierchoisi;
+    std:: string extension1=".txt";
+    std::string extension2="_weights_0.txt";
+    std::string nomfichierchoisi;
+    std::string nomfichierpoids;
+    std::cout<<"Quel fichier allez-vous choisir?"<<std::endl;
+    std::cin>>fichierchoisi;
+    nomfichierchoisi= fichierchoisi+extension1;
+    nomfichierpoids=fichierchoisi+extension2;
+    graphe g{nomfichierchoisi,nomfichierpoids};
     do
     {
         std::cout<<"------Bienvenue dans votre generateur------"<<std::endl;
@@ -34,7 +43,7 @@ int main()
         case 2:
             {
                 Svgfile svgout;
-                g.afficherCasPossible(svgout);
+                //g.afficherCasPossible(svgout); en enlevant les commentaires
                 break;
             }
         case 3:
@@ -76,3 +85,4 @@ int main()
      }while(choix!=0);
     return 0;
 }
+

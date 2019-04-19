@@ -45,9 +45,37 @@ class Sommet
         */
 
         int getDegre() const;
+
+        /*!
+        * \brief Obtention du x du sommet
+        * Méthode qui permet d'obtenir la position en abscisse du sommet
+        * \return un float qui correspond à l'abscisse du sommet
+        */
+
         int getX() const;
+
+        /*!
+        * \brief Obtention du y du sommet
+        * Méthode qui permet d'obtenir la position en ordonnée du sommet
+        * \return un float qui correspond à l'ordonnée du sommet
+        */
+
         int getY() const;
+
+        /*!
+        * \brief Obtention des voisins
+        * Méthode qui permet d'obtenir l'ensemble des voisins d'un sommet
+        * \return un vector de Sommet* qui correspond aux voisins du sommet
+        */
+
         std::vector<Sommet*> getVoisins();
+
+        /*!
+        * \brief Obtention de l'ID du sommet
+        * Méthode qui permet d'obtenir l'identifiant du sommet
+        * \return une chaine de caractères qui correspond à l'identifiant sommet
+        */
+
         std::string getId() const;
         void afficherVoisins() const;
         ///méthode de parcours en largeur du graphe à partir du sommet
@@ -58,6 +86,10 @@ class Sommet
         ///méthode qui recherche la composante connexe du sommet
         ///renvoie la liste des ids des sommets de la composante
         std::unordered_set<std::string> rechercherCC() const;
+        /*!
+        * \brief Destructeur
+        * Destructeur de la classe Sommet
+        */
         ~Sommet();
 
     protected:

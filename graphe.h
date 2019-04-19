@@ -105,8 +105,8 @@ class graphe
 
        private:
         /// Le réseau est constitué d'une collection de sommets et d'arêtes
-        std::unordered_map<std::string,Sommet*> m_sommets;/*!<Tous les sommets du graphe stockés dans une map (clé=id du sommet, valeur= pointeur sur le sommet)*/
-        std::unordered_map<std::string,Arete*> m_aretes; /*!< Toutes les arêtes du graphe stockés dans une map (clé= id de l'arête, valeur= pointeur sur l'arête)*/
+        std::vector<Sommet*> m_sommets;/*!<Tous les sommets du graphe stockés dans une map (clé=id du sommet, valeur= pointeur sur le sommet)*/
+        std::vector<Arete*> m_aretes; /*!< Toutes les arêtes du graphe stockés dans une map (clé= id de l'arête, valeur= pointeur sur l'arête)*/
         int m_ordre; /*!< ordre du graphe*/
         int m_taille; /*!<taille du graphe*/
 
