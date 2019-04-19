@@ -46,14 +46,6 @@ class graphe
 
         ~graphe();
         void afficher() const;
-        ///lance un parcours en largeur à partir du sommet d'identifiant id
-        void parcoursBFS(std::string) const;
-        ///lance et affiche le parcours en largeur à partir du sommet d'identifiant id
-        void afficherBFS(std::string) const;
-         ///lance un parcours en profondeur à partir du sommet d'identifiant id
-        void parcoursDFS(std::string) const;
-        ///lance et affiche le parcours en profondeur à partir du sommet d'identifiant id
-        void afficherDFS(std::string) const;
 
         /*!
         * \brief Dessiner
@@ -68,22 +60,17 @@ class graphe
         */
 
         void dessinerKruskal(Svgfile& svgout);
-        ///recherche et affiche les composantes connexes
-        ///retourne le nombre de composantes connexes
-        int rechercher_afficherToutesCC() const;
-        ///Détermine si un graphe admet une chaine euleriennne
-        int isEulerien()const;
         ///Arbre couvrant de poids minimum
         void tri(std::vector<Arete*>& vecteurTri);
         std::vector<Arete*> kruskal();
-        std::vector<std::vector<std::string>> compterBinaire();
+        //std::vector<std::vector<std::string>> compterBinaire();
 
         /*!
         * \brief Chemins possibles
         * Affichage de tous les chemins possibles
         */
 
-        void afficherCasPossible(Svgfile& svgout);
+        //void afficherCasPossible(Svgfile& svgout);
 
         /*!
         * \brief Suppression de chemins
@@ -93,13 +80,12 @@ class graphe
         * false sinon
         */
 
-        bool Cas_Admissibles(std::vector<std::string> cas_possible);
-        float Dijkstra(int idSommet, std::vector<std::string> casActuel);
-        void partie3 (Svgfile& svgout);
+        //bool Cas_Admissibles(std::vector<std::string> cas_possible);
+        //float Dijkstra(int idSommet, std::vector<std::string> casActuel);
+        //void partie3 (Svgfile& svgout);
         std::vector<std::vector<bool>> cas_possibles();
         void afficherCasPossible_Manhattan(Svgfile& svgout);
         bool Cas_Admissibles_Manhattan(std::vector<bool> cas_possible);
-        bool testOrdre(std::vector<bool> cas_possible);
 
     protected:
 

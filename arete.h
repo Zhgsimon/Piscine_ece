@@ -32,7 +32,7 @@ class Arete
         *
         * \param sommet_arrive : identifiant du sommet d'arrivee de l'arete
         */
-        Arete(std::string id, std::string sommet_depart, std::string sommet_arrive);
+        Arete(int id, int sommet_depart, int sommet_arrive);
 
         /*!
         * \brief Ajoute un poids
@@ -62,14 +62,14 @@ class Arete
         * Méthode qui permet d'obtenir l'identifiant du sommet de depart de l'arete
         * \return une chaine de caractères qui correspond à l'identifiant sommet de depart de l'arete
         */
-        std::string getSommetDepart() const;
+        int getSommetDepart() const;
 
         /*!
         * \brief Obtention de l'ID du sommet de'arrivee de l'arete
         * Méthode qui permet d'obtenir l'identifiant du sommet d'arrivee de l'arete
         * \return une chaine de caractères qui correspond à l'identifiant sommet de'arrivee de l'arete
         */
-        std::string getSommetArrive() const;
+        int getSommetArrive() const;
 
         /*!
         * \brief Obtention de l'ID de l'arete
@@ -77,7 +77,7 @@ class Arete
         * \return une chaine de caractères qui correspond à l'identifiant de l'arete
         */
 
-        std::string getId() const;
+        int getId() const;
 
         /*!
         * \brief Destructeur
@@ -86,10 +86,10 @@ class Arete
         virtual ~Arete();
 
     private:
-        std::string m_id; /*!< Identifiant de l'arete*/
+        int m_id; /*!< Identifiant de l'arete*/
         std::vector<float> m_poids; /*!< Vecteur des poids flottants de l'arete (dans notre cas le cout et la distance)*/
-        std::string m_sommet_depart; /*!< chaine de caracteres correspondant à l'Identifiant du sommet de depart de l'arete*/
-        std::string m_sommet_arrive; /*!< chaine de caracteres correspondant à l'Identifiant du sommet de depart de l'arete*/
+        int m_sommet_depart; /*!< chaine de caracteres correspondant à l'Identifiant du sommet de depart de l'arete*/
+        int m_sommet_arrive; /*!< chaine de caracteres correspondant à l'Identifiant du sommet de depart de l'arete*/
 };
 
 #endif // ARETE_H

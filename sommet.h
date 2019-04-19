@@ -34,7 +34,7 @@ class Sommet
         * \param y : position en ordonnée du sommet
         */
 
-        Sommet(std::string,double,double);
+        Sommet(int,double,double);
         void ajouterVoisin(Sommet*);
         void afficherData() const;
 
@@ -76,16 +76,8 @@ class Sommet
         * \return une chaine de caractères qui correspond à l'identifiant sommet
         */
 
-        std::string getId() const;
+        int getId() const;
         void afficherVoisins() const;
-        ///méthode de parcours en largeur du graphe à partir du sommet
-        ///renvoie les prédécesseurs sous forme d'une map (clé=id du sommet,valeur=id de son prédécesseur)
-        std::unordered_map<std::string,std::string> parcoursBFS() const;
-         ///méthode de parcours en profondeur du graphe à partir du sommet
-        std::unordered_map<std::string,std::string> parcoursDFS() const;
-        ///méthode qui recherche la composante connexe du sommet
-        ///renvoie la liste des ids des sommets de la composante
-        std::unordered_set<std::string> rechercherCC() const;
         /*!
         * \brief Destructeur
         * Destructeur de la classe Sommet
@@ -98,7 +90,7 @@ class Sommet
         /// Voisinage : liste d'adjacence
         std::vector<Sommet*> m_voisins; /*!< Tous les sommets voisins du sommets sont stockés dans une map (valeur= pointeur sur le sommet voisin)*/
         /// Données spécifiques du sommet
-        std::string m_id; /*!< Identifiant du sommet*/
+        int m_id; /*!< Identifiant du sommet*/
         double m_x, m_y; /*!< Position du sommet */
 
 

@@ -1,6 +1,6 @@
 #include "arete.h"
 
-Arete::Arete(std::string id, std::string sommet_depart, std::string sommet_arrive): m_id{id},m_sommet_depart{sommet_depart},m_sommet_arrive{sommet_arrive}
+Arete::Arete(int id, int sommet_depart, int sommet_arrive): m_id{id},m_sommet_depart{sommet_depart},m_sommet_arrive{sommet_arrive}
 {
 }
 
@@ -16,15 +16,15 @@ float Arete::getPoids2()const{
     return m_poids[1];
 }
 
-std::string Arete::getSommetDepart() const{
+int Arete::getSommetDepart() const{
     return m_sommet_depart;
 }
 
-std::string Arete::getSommetArrive() const{
+int Arete::getSommetArrive() const{
     return m_sommet_arrive;
 }
 
-std::string Arete::getId() const {
+int Arete::getId() const {
     return m_id;
 }
 
