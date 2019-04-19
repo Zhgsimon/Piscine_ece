@@ -10,7 +10,8 @@
 #include <limits>
 
 
-graphe::graphe(std::string nomFichier,std::string fichierPoids){
+graphe::graphe(std::string nomFichier,std::string fichierPoids)
+{
     std::ifstream ifs{nomFichier};
     if (!ifs)
         throw std::runtime_error( "Impossible d'ouvrir en lecture " + nomFichier );
@@ -22,10 +23,17 @@ graphe::graphe(std::string nomFichier,std::string fichierPoids){
     double x,y;
     m_ordre=ordre;
     //lecture des sommets
-    for (int i=0; i<ordre; ++i){
-        ifs>>id; if(ifs.fail()) throw std::runtime_error("Probleme lecture données sommet");
-        ifs>>x; if(ifs.fail()) throw std::runtime_error("Probleme lecture données sommet");
-        ifs>>y; if(ifs.fail()) throw std::runtime_error("Probleme lecture données sommet");
+    for (int i=0; i<ordre; ++i)
+    {
+        ifs>>id;
+        if(ifs.fail())
+            throw std::runtime_error("Probleme lecture données sommet");
+        ifs>>x;
+        if(ifs.fail())
+            throw std::runtime_error("Probleme lecture données sommet");
+        ifs>>y;
+        if(ifs.fail())
+            throw std::runtime_error("Probleme lecture données sommet");
         m_sommets.insert({id,new Sommet{id,x,y}});
     }
     int taille;
@@ -39,11 +47,18 @@ graphe::graphe(std::string nomFichier,std::string fichierPoids){
     float poids1;
     float poids2;
     //lecture des aretes
-    for (int i=0; i<taille; ++i){
+    for (int i=0; i<taille; ++i)
+    {
         //lecture des ids des deux extrémités
-        ifs>>id_arete; if(ifs.fail()) throw std::runtime_error("Probleme lecture poids arete");
-        ifs>>id_depart; if(ifs.fail()) throw std::runtime_error("Probleme lecture arete sommet 1");
-        ifs>>id_arrive; if(ifs.fail()) throw std::runtime_error("Probleme lecture arete sommet 2");
+        ifs>>id_arete;
+        if(ifs.fail())
+            throw std::runtime_error("Probleme lecture poids arete");
+        ifs>>id_depart;
+        if(ifs.fail())
+            throw std::runtime_error("Probleme lecture arete sommet 1");
+        ifs>>id_arrive;
+        if(ifs.fail())
+            throw std::runtime_error("Probleme lecture arete sommet 2");
         m_aretes.insert({id_arete,new Arete{id_arete,id_depart,id_arrive}});
         (m_sommets.find(id_depart))->second->ajouterVoisin((m_sommets.find(id_arrive))->second);
         (m_sommets.find(id_arrive))->second->ajouterVoisin((m_sommets.find(id_depart))->second);
@@ -64,12 +79,13 @@ graphe::graphe(std::string nomFichier,std::string fichierPoids){
         for (int j=0; j<taille; ++j)
         {
             ifs2>>poids1;
-           (m_aretes.find(id_arete))->second->ajouterPoids(poids1);
+            (m_aretes.find(id_arete))->second->ajouterPoids(poids1);
         }
     }
     ifs2.close();
 }
-void graphe::afficher() const{
+void graphe::afficher() const
+{
     int numero=0;
     int nbsommet=0;
     std::cout<<"graphe : "<<std::endl;
@@ -88,47 +104,56 @@ void graphe::afficher() const{
     }
 }
 
-void graphe::parcoursBFS(std::string id) const{
+void graphe::parcoursBFS(std::string id) const
+{
     Sommet*s0=(m_sommets.find(id))->second;
     std::unordered_map<std::string,std::string> l_pred;
     l_pred=s0->parcoursBFS();
 }
-void graphe::afficherBFS(std::string id) const{
+void graphe::afficherBFS(std::string id) const
+{
     Sommet*s0=(m_sommets.find(id))->second;
     std::unordered_map<std::string,std::string> l_pred;
     std::cout<<"parcoursBFS a partir de "<<id<<" :"<<std::endl;
     l_pred=s0->parcoursBFS();
-    for(auto s:l_pred){
+    for(auto s:l_pred)
+    {
         std::cout<<s.first<<" <--- ";
         std::pair<std::string,std::string> pred=s;
-        while(pred.second!=id){
+        while(pred.second!=id)
+        {
             pred=*l_pred.find(pred.second);
             std::cout<<pred.first<<" <--- ";
         }
         std::cout<<id<<std::endl;
     }
 }
-void graphe::parcoursDFS(std::string id) const{
+void graphe::parcoursDFS(std::string id) const
+{
     Sommet*s0=(m_sommets.find(id))->second;
     std::unordered_map<std::string,std::string> l_pred;
     l_pred=s0->parcoursDFS();
 }
-void graphe::afficherDFS(std::string id) const{
+void graphe::afficherDFS(std::string id) const
+{
     Sommet*s0=(m_sommets.find(id))->second;
     std::unordered_map<std::string,std::string> l_pred;
     std::cout<<"parcoursDFS a partir de "<<id<<" :"<<std::endl;
     l_pred=s0->parcoursDFS();
-    for(auto s:l_pred){
+    for(auto s:l_pred)
+    {
         std::cout<<s.first<<" <--- ";
         std::pair<std::string,std::string> pred=s;
-        while(pred.second!=id){
+        while(pred.second!=id)
+        {
             pred=*l_pred.find(pred.second);
             std::cout<<pred.first<<" <--- ";
         }
         std::cout<<id<<std::endl;
     }
 }
-int graphe::rechercher_afficherToutesCC() const{
+int graphe::rechercher_afficherToutesCC() const
+{
     int i=0;
     int compteursommet=0;
     int nbsommet=0;
@@ -153,7 +178,8 @@ int graphe::rechercher_afficherToutesCC() const{
             std::cout<<std::endl;
             compteursommet++;
         }
-        else compteursommet++;
+        else
+            compteursommet++;
     }
     return i;
 }
@@ -189,7 +215,7 @@ int graphe::isEulerien()const
         std::cout <<"Les extremites sont : ";
         for (itr = liste_impair.begin(); itr != liste_impair.end(); itr++) /// affichage des extrémités
         {
-           std::cout <<(*itr) <<"    ";
+            std::cout <<(*itr) <<"    ";
         }
         return 1;
     }
@@ -197,13 +223,14 @@ int graphe::isEulerien()const
         return 0;
 }
 
-void graphe::dessiner(Svgfile& svgout) const {
+void graphe::dessiner(Svgfile& svgout) const
+{
     svgout.addGrid(50,true,"black");
-    for (int i=0; i<m_sommets.size();++i)
+    for (int i=0; i<m_sommets.size(); ++i)
     {
         svgout.addDisk(m_sommets.find(std::to_string(i))->second->getX(), m_sommets.find(std::to_string(i))->second->getY(), 10, "red");
     }
-    for (int i=0; i<m_aretes.size();++i)
+    for (int i=0; i<m_aretes.size(); ++i)
     {
         std::string id_sommetDepart = m_aretes.find(std::to_string(i))->second->getSommetDepart();
         std::string id_sommetArrive = m_aretes.find(std::to_string(i))->second->getSommetArrive();
@@ -261,13 +288,15 @@ std::vector<Arete*> graphe::kruskal()
                 if (Tableau_connexite.find(std::to_string(i))->second == indice)
                     Tableau_connexite[std::to_string(i)] = Tableau_connexite.find(id_sommetDepart)->second;
             }
+
         }
         j++;
     }
     return arbre_de_poids_minimum;
 }
 
-void graphe::dessinerKruskal(Svgfile& svgout) {
+void graphe::dessinerKruskal(Svgfile& svgout)
+{
     std::vector<Arete *> arbre_de_poids_minimum;
     arbre_de_poids_minimum = kruskal();
     //svgout.addGrid(50,true,"black");
@@ -283,7 +312,169 @@ void graphe::dessinerKruskal(Svgfile& svgout) {
     }
 }
 
-std::vector<std::vector<std::string>> graphe::compterBinaire(){
+std::vector<std::vector<bool>> graphe::cas_possibles()
+{
+    std::vector<std::vector<bool>> conteneur_cas_possibles;
+
+    std::vector<bool> cas_actuel (m_aretes.size(),true);
+    ///et j'effectue toutes les combinaisons possibles
+    for(int i =0; i< m_aretes.size()+1;i++)
+    {
+        do
+        {
+            /*for(int j=0; j<cas_actuel.size();j++)
+            {
+                std::cout <<cas_actuel[j];
+            }
+            std::cout<<std::endl;*/
+            conteneur_cas_possibles.push_back(cas_actuel);
+        }while(std::next_permutation(cas_actuel.begin(),cas_actuel.end()));
+        cas_actuel[i]=0;
+    }
+
+       /* do
+        {
+            cas_actuel[j]=1;
+            conteneur_cas_possibles.push_back(cas_actuel);
+
+            for(int i =0; i<cas_actuel.size();i++)
+                std::cout<<cas_actuel[i];
+                j++;
+        }
+        while(std::next_permutation(cas_actuel.begin(),cas_actuel.end()));*/
+
+    /*///affichage conteneur
+    for(int i=0; i<conteneur_cas_possibles.size();i++)
+    {
+        for(int j=0; j<conteneur_cas_possibles[i].size();j++)
+        {
+            std::cout<< conteneur_cas_possibles[i][j];
+        }
+        std::cout<<"  cas numero"<<i<<std::endl;
+    }*/
+    return conteneur_cas_possibles;
+}
+bool graphe::Cas_Admissibles_Manhattan(std::vector<bool> cas_possible)
+{
+    std::string sommetDepart;
+    std::string sommetArrive;
+    std::unordered_map<std::string,int> Tableau_connexite;
+    bool admissible=false;
+    int composante_connexe_test;
+    int composante_connexe_actuelle;
+    int i=0;
+    int compteur=0;
+    ///j'initialise mon tableau de connexite
+    for(int i=0; i<m_sommets.size();i++)
+    {
+        Tableau_connexite.insert({m_sommets.find(std::to_string(i))->second->getId(),i});
+    }
+
+    ///je parcours mon vecteur de bool
+    for(int i=0; i<cas_possible.size();i++)
+    {
+
+        if(cas_possible[i]==true)
+        {
+            sommetDepart=m_aretes.find(std::to_string(i))->second->getSommetDepart();
+            sommetArrive=m_aretes.find(std::to_string(i))->second->getSommetArrive();
+
+            if(Tableau_connexite.find(sommetDepart)->second!=Tableau_connexite.find(sommetArrive)->second)
+            {
+
+                ///parcours des CC de mon tableau de connexite et mise a jour des composantes connexes
+                for(int j=0; j<Tableau_connexite.size();++j)
+                {
+                     if (Tableau_connexite.find(std::to_string(j))->second == Tableau_connexite.find(sommetArrive)->second)
+                            Tableau_connexite[std::to_string(j)] = Tableau_connexite.find(sommetDepart)->second;
+                }
+            }
+        }
+
+    }
+
+    composante_connexe_test=Tableau_connexite.find("0")->second;
+    for(int i=0; i<Tableau_connexite.size();i++)
+    {
+
+        //std::cout<< Tableau_connexite.find(std::to_string(i))->second <<"  ";
+        composante_connexe_actuelle=Tableau_connexite.find(std::to_string(i))->second;
+        if(composante_connexe_actuelle==composante_connexe_test)
+        {
+            compteur++;
+        }
+    }
+    printf("\n");
+    if(compteur==Tableau_connexite.size())
+        admissible=true;
+    return admissible;
+}
+void graphe::afficherCasPossible_Manhattan(Svgfile& svgout)
+{
+    std::vector<std::vector<bool>> recup;
+    std::vector<float> recupPoids;
+
+    std::unordered_map<std::vector<bool>,std::vector<float>> conteneurCasPossible;
+    float poidsTotal;
+    float poidsTotal2;
+    //std::unordered_map<int,std::vector<float>> conteneurCasPossible;
+
+    recup=cas_possibles();
+
+    ///affichage conteneur
+    ///test recup.push_back({true,true,true,true,true});
+    /*for (int i=0; i<recup.size();i++)
+    {
+        for (int j=0; j<recup[i].size();j++)
+            std::cout<<recup[i][j];
+        std::cout<<"  cas numero"<<i<<std::endl;
+    }*/
+
+    ///remplir mon conteneurCasPossible
+    for(size_t i=0; i<recup.size();i++)
+    {
+        poidsTotal=0;
+        poidsTotal2=0;
+        if(Cas_Admissibles_Manhattan(recup[i])==true)
+        {
+            for(size_t j=0;j<recup[i].size();++j)
+            {
+                    if(recup[i][j]==1)
+                    {
+                       poidsTotal=poidsTotal+m_aretes.find(std::to_string(j))->second->getPoids();
+                       poidsTotal2=poidsTotal2+m_aretes.find(std::to_string(j))->second->getPoids2();
+                    }
+            }
+            ///on insère dans le conteneur
+            conteneurCasPossible.insert({recup[i],{poidsTotal,poidsTotal2}});
+        }
+    }
+    std::unordered_map<std::vector<bool>,std::vector<float>>::iterator var1;
+    std::unordered_map<std::vector<bool>,std::vector<float>>::iterator var2;
+
+    for (var1 = conteneurCasPossible.begin(); var1 != conteneurCasPossible.end(); var1++)
+    {
+
+        for (var2 = conteneurCasPossible.begin(); var2 != conteneurCasPossible.end(); var2++)
+        {
+
+            if (var1->second[0] < var2->second[0] && var1->second[1] < var2->second[1])
+            {
+                printf("test  ");
+                svgout.addDisk(var2->second[0]*10,600-var2->second[1]*10,5,"red");
+                //conteneurCasPossible.erase(var2);
+            }
+        }
+    }
+    for (var1 = conteneurCasPossible.begin(); var1 != conteneurCasPossible.end(); var1++)
+    {
+        svgout.addDisk(var1->second[0]*10,600-var1->second[1]*10,5,"green");
+    }
+}
+
+
+std::vector<std::vector<std::string>> graphe::compterBinaire()
+{
     double nb_depart = pow(2.0,m_aretes.size());
     std::vector<std::vector<std::string>> casPossible(nb_depart);
     for (int i=0; i < nb_depart; ++i)
@@ -347,9 +538,9 @@ void graphe::afficherCasPossible(Svgfile& svgout)
         //std::cout << "Cas "<<compteur<<" : ";
         for (size_t j=0; j < recup[i].size(); ++j)
         {
-             //std::cout << recup[i][j] <<"  " ;
-             poidsTotal = poidsTotal + m_aretes.find(recup[i][j])->second->getPoids();
-             poidsTotal2 = poidsTotal2 + m_aretes.find(recup[i][j])->second->getPoids2();
+            //std::cout << recup[i][j] <<"  " ;
+            poidsTotal = poidsTotal + m_aretes.find(recup[i][j])->second->getPoids();
+            poidsTotal2 = poidsTotal2 + m_aretes.find(recup[i][j])->second->getPoids2();
         }
         recupPoids.push_back(poidsTotal);
         recupPoids.push_back(poidsTotal2);
@@ -383,13 +574,17 @@ bool triPoidsArete(const Arete*a1, const Arete*a2)
     return a1->getPoids() < a2->getPoids();
 }
 
-class prioritize{
-    public: bool operator ()(std::pair<std::string, float>&p1 ,std::pair<std::string, float>&p2){
+class prioritize
+{
+public:
+    bool operator ()(std::pair<std::string, float>&p1,std::pair<std::string, float>&p2)
+    {
         return p1.second>p2.second;
-        }
+    }
 };
 
-void graphe::partie3 (Svgfile& svgout){
+void graphe::partie3 (Svgfile& svgout)
+{
     std::vector<std::vector<std::string>> recup;
     std::vector<float> recupPoids;
     std::unordered_map<int,std::vector<float>> conteneurCasPossible;
@@ -405,16 +600,16 @@ void graphe::partie3 (Svgfile& svgout){
         //std::cout << "Cas "<<compteur<<" : ";
         for (size_t j=0; j < recup[i].size(); ++j)
         {
-             std::cout << recup[i][j] <<"  " ;
-             poidsTotal = poidsTotal + m_aretes.find(recup[i][j])->second->getPoids();
-             for (int k=0; k < m_sommets.size(); ++k)
+            std::cout << recup[i][j] <<"  " ;
+            poidsTotal = poidsTotal + m_aretes.find(recup[i][j])->second->getPoids();
+            for (int k=0; k < m_sommets.size(); ++k)
+            {
+                for (int l=0; l < recup[i].size(); ++l)
                 {
-                    for (int l=0; l < recup[i].size(); ++l)
-                    {
                     recipient = Dijkstra(k,recup[i])[l];
                     poidsTotal2 = poidsTotal2 + recipient;
-                    }
                 }
+            }
         }
         printf("%f\n",poidsTotal2);
         recupPoids.push_back(poidsTotal);
@@ -445,14 +640,14 @@ void graphe::partie3 (Svgfile& svgout){
 }
 
 
-std::vector<float> graphe::Dijkstra(int idSommet , std::vector<std::string> casActuel)
+std::vector<float> graphe::Dijkstra(int idSommet, std::vector<std::string> casActuel)
 {
     std::vector<float> Distances(m_sommets.size());
-    for(float i=0;i<m_sommets.size();i++) //Set initial distances to Infinity
-        Distances[i]=10000000.0;
-    Distances[idSommet] = 0;
+    for(float i=0; i<m_sommets.size(); i++) //Set initial distances to Infinity
+//        Distances[i]=FLOAT  ;
+        Distances[idSommet] = 0;
     Sommet*sommetpremier=new Sommet(std::to_string(idSommet),0,0);
-    for (int i=0;i<m_sommets.find(std::to_string(idSommet))->second->getVoisins().size();++i)
+    for (int i=0; i<m_sommets.find(std::to_string(idSommet))->second->getVoisins().size(); ++i)
         sommetpremier->ajouterVoisin(m_sommets.find(std::to_string(idSommet))->second->getVoisins()[i]);
     std::unordered_set< std::string > marquage;
     std::priority_queue< std::pair <std::string,float>, std::vector< std::pair <std::string,float> >, prioritize > file;
@@ -471,7 +666,7 @@ std::vector<float> graphe::Dijkstra(int idSommet , std::vector<std::string> casA
             std::unordered_set<std::string>::const_iterator got = marquage.find (it->getId());
             if (got == marquage.end())
             {
-                for (int j=0; j < casActuel.size();++j)
+                for (int j=0; j < casActuel.size(); ++j)
                 {
                     std::string sommetDepart = m_aretes.find(casActuel[j])->second->getSommetDepart();
                     std::string sommetArrive = m_aretes.find(casActuel[j])->second->getSommetArrive();
