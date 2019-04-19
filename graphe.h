@@ -96,6 +96,10 @@ class graphe
         bool Cas_Admissibles(std::vector<std::string> cas_possible);
         float Dijkstra(int idSommet, std::vector<std::string> casActuel);
         void partie3 (Svgfile& svgout);
+        std::vector<std::vector<bool>> cas_possibles();
+        void afficherCasPossible_Manhattan(Svgfile& svgout);
+        bool Cas_Admissibles_Manhattan(std::vector<bool> cas_possible);
+        bool testOrdre(std::vector<bool> cas_possible);
 
     protected:
 

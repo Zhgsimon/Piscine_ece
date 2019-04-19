@@ -5,7 +5,7 @@
 int main()
 {
     int choix;
-    graphe g{"cubetown.txt","cubetown_weights_0.txt"};
+    graphe g{"manhattan.txt","manhattan_weights_0.txt"};
     do
     {
         std::cout<<"------Bienvenue dans votre generateur------"<<std::endl;
@@ -45,9 +45,9 @@ int main()
             }
 
         case 4:
-            {
+        {
                 Svgfile svgout;
-                g.afficherCasPossible(svgout);
+                g.afficherCasPossible_Manhattan(svgout);
                 break;
             }
         case 5:
@@ -72,8 +72,7 @@ int main()
     if (resultat == 2)
         std::cout<<"Le graphe nadmet un cycle eulerien."<<std::endl;
     */
-     }
+        }
      }while(choix!=0);
-
     return 0;
-    }
+}
