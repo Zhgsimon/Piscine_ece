@@ -229,6 +229,31 @@ std::vector<std::vector<bool>> graphe::cas_possibles()
     return conteneur_cas_possibles;
 }
 
+float nombreDivise(float nombre)
+{
+    if (nombre > 200 && nombre < 250)
+    {
+        nombre = nombre / 1.25;
+    }
+    if (nombre > 250 && nombre < 500)
+    {
+        nombre = nombre / 2.5;
+    }
+    if (nombre > 500 && nombre < 1000)
+    {
+        nombre = nombre / 5;
+    }
+    if (nombre > 1000 && nombre < 3000)
+    {
+        nombre = nombre / 10;
+    }
+    if (nombre > 3000 && nombre < 8000)
+    {
+        nombre = nombre / 40;
+    }
+    return nombre;
+}
+
 std::vector<std::vector<bool>> graphe::cas_possibles_Partie3()
 {
     std::vector<std::vector<bool>> conteneur_cas_possibles;
@@ -340,7 +365,7 @@ void graphe::afficherCasPossible_Manhattan(Svgfile& svgout)
     }
     double decalage = 0;
     float ampli = 5.0;
-
+    float repere=600.0;
     for (int i=0; i < conteneurPoids1.size(); ++i)
     {
         if (conteneurPoids1[i] != 0 && conteneurPoids2[i] != 0)
@@ -350,24 +375,21 @@ void graphe::afficherCasPossible_Manhattan(Svgfile& svgout)
                     if (i!=j)
                         if (conteneurPoids1[i] <= conteneurPoids1[j] && conteneurPoids2[i] <= conteneurPoids2[j])
                         {
-                            svgout.addDisk(conteneurPoids1[j]*5,800-conteneurPoids2[j]*5,2,"red");
+                            svgout.addDisk(400+nombreDivise(conteneurPoids1[j])*3,repere-nombreDivise(conteneurPoids2[j])*3,2,"red");
                             conteneurPoids1[j]=0;
                             conteneurPoids2[j]=0;
                         }
             }
     }
     std::cout<<conteneurPoids1.size()<<std::endl;
+    svgout.addLine(400,600,700,600,"black");
+    svgout.addLine(400,600,400,300,"black");
     for (int j=0; j < conteneurPoids1.size(); ++j)
     {
         if (conteneurPoids1[j] != 0  && conteneurPoids2[j] != 0)
         {
-            svgout.addDisk(conteneurPoids1[j]*5,800-conteneurPoids2[j]*5,2,"green");
+            svgout.addDisk(400+nombreDivise(conteneurPoids1[j])*3,600-nombreDivise(conteneurPoids2[j])*3,2,"green");
             bonCas.push_back(cpt);
-            if (j==1)
-            {
-                svgout.addLine(conteneurPoids1[j]*5-50,800-conteneurPoids2[j]*5+50,conteneurPoids1[j]*5+300,800-conteneurPoids2[j]*5+50,"black");
-                svgout.addLine(conteneurPoids1[j]*5-50,800-conteneurPoids2[j]*5+50,conteneurPoids1[j]*5-50,800-conteneurPoids2[j]*5-280,"black");
-            }
         }
         cpt++;
     }
@@ -453,24 +475,21 @@ void graphe::partie3 (Svgfile& svgout, int oriente)
                     if (i!=j)
                         if (conteneurPoids1[i] <= conteneurPoids1[j] && conteneurPoids2[i] <= conteneurPoids2[j])
                         {
-                            svgout.addDisk(conteneurPoids1[j]*5,800-conteneurPoids2[j]*5,2,"red");
+                            svgout.addDisk(400+nombreDivise(conteneurPoids1[j])*2,600-nombreDivise(conteneurPoids2[j])*2,2,"red");
                             conteneurPoids1[j]=0;
                             conteneurPoids2[j]=0;
                         }
             }
     }
     std::cout<<conteneurPoids1.size()<<std::endl;
+    svgout.addLine(400,600,700,600,"black");
+                svgout.addLine(400,600,400,300,"black");
     for (int j=0; j < conteneurPoids1.size(); ++j)
     {
         if (conteneurPoids1[j] != 0  && conteneurPoids2[j] != 0)
         {
-            svgout.addDisk(conteneurPoids1[j]*5,800-conteneurPoids2[j]*5,2,"green");
+            svgout.addDisk(400+nombreDivise(conteneurPoids1[j])*2,600-nombreDivise(conteneurPoids2[j])*2,2,"green");
             bonCas.push_back(cpt);
-            if (j==1)
-            {
-                svgout.addLine(conteneurPoids1[j]*5-50,800-conteneurPoids2[j]*5+50,conteneurPoids1[j]*5+300,800-conteneurPoids2[j]*5+50,"black");
-                svgout.addLine(conteneurPoids1[j]*5-50,800-conteneurPoids2[j]*5+50,conteneurPoids1[j]*5-50,800-conteneurPoids2[j]*5-280,"black");
-            }
         }
         cpt++;
     }
