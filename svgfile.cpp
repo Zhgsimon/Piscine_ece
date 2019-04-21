@@ -362,7 +362,7 @@ void Svgfile::addCross(double x, double y, double span, std::string color)
 
 void Svgfile::addText(double x, double y, std::string text, std::string color)
 {
-    /// <text x="180" y="60">Un texte</text>
+    /// <text x="90" y="30">Un texte</text>
     m_ostrm << "<text "
             << attrib("x", x)
             << attrib("y", y)

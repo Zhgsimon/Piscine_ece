@@ -5,18 +5,23 @@
 int main()
 {
     int choix;
-    std::string fichierchoisi;
+    int oriente;
+    do
+    {
+        std::string fichierchoisi;
     std:: string extension1=".txt";
     std::string extension2="_weights_0.txt";
     std::string nomfichierchoisi;
     std::string nomfichierpoids;
     std::cout<<"Quel fichier allez-vous choisir?"<<std::endl;
     std::cin>>fichierchoisi;
+    std::cout << "Oriente:1 / Non-oriente:0 . Votre choix : " ;
+    do {
+        std::cin >> oriente;
+    }while (oriente !=1 && oriente !=0);
     nomfichierchoisi= fichierchoisi+extension1;
     nomfichierpoids=fichierchoisi+extension2;
-    graphe g{nomfichierchoisi,nomfichierpoids};
-    do
-    {
+    graphe g{nomfichierchoisi,nomfichierpoids,oriente};
         std::cout<<"------Bienvenue dans votre generateur------"<<std::endl;
         std::cout<<"------Faites un choix------"<<std::endl;
         std::cout<<"0.Quitter"<<std::endl;
@@ -43,7 +48,7 @@ int main()
         case 2:
             {
                 Svgfile svgout;
-                //g.afficherCasPossible(svgout); en enlevant les commentaires
+                g.afficherCasPossible_Manhattan(svgout);
                 break;
             }
         case 3:
@@ -62,7 +67,7 @@ int main()
         case 5:
             {
                 Svgfile svgout;
-                //g.partie3(svgout);
+                g.partie3(svgout,oriente);
                 break;
             }
         }

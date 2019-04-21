@@ -37,7 +37,7 @@ class graphe
         * \brief format du fichierPoids: taille/nb de pondérations/liste des id des aretes/poids des aretes
         */
 
-        graphe(std::string,std::string);
+        graphe(std::string,std::string,int);
 
         /*!
         * \brief Destructeur
@@ -61,8 +61,8 @@ class graphe
 
         void dessinerKruskal(Svgfile& svgout);
         ///Arbre couvrant de poids minimum
-        void tri(std::vector<Arete*>& vecteurTri);
-        std::vector<Arete*> kruskal();
+        void tri(std::vector<Arete*>& vecteurTri, int choixPoids);
+        std::vector<Arete*> kruskal(int choixPoids);
         //std::vector<std::vector<std::string>> compterBinaire();
 
         /*!
@@ -81,11 +81,12 @@ class graphe
         */
 
         //bool Cas_Admissibles(std::vector<std::string> cas_possible);
-        //float Dijkstra(int idSommet, std::vector<std::string> casActuel);
-        //void partie3 (Svgfile& svgout);
+        float Dijkstra(int idSommet, std::vector<bool> casActuel,int);
+        void partie3 (Svgfile& svgout,int);
         std::vector<std::vector<bool>> cas_possibles();
         void afficherCasPossible_Manhattan(Svgfile& svgout);
         bool Cas_Admissibles_Manhattan(std::vector<bool> cas_possible);
+        std::vector<std::vector<bool>> cas_possibles_Partie3();
 
     protected:
 
