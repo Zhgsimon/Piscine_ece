@@ -53,6 +53,7 @@ class graphe
         */
 
         void dessiner(Svgfile& svgout) const;
+        void dessiner_partie2_3(Svgfile& svgout,double x_origine,double y_origine) const;
 
         /*!
         * \brief Dessiner Kruskal
@@ -63,14 +64,11 @@ class graphe
         ///Arbre couvrant de poids minimum
         void tri(std::vector<Arete*>& vecteurTri, int choixPoids);
         std::vector<Arete*> kruskal(int choixPoids);
-        //std::vector<std::vector<std::string>> compterBinaire();
 
         /*!
         * \brief Chemins possibles
         * Affichage de tous les chemins possibles
         */
-
-        //void afficherCasPossible(Svgfile& svgout);
 
         /*!
         * \brief Suppression de chemins
@@ -80,13 +78,14 @@ class graphe
         * false sinon
         */
 
-        //bool Cas_Admissibles(std::vector<std::string> cas_possible);
         float Dijkstra(int idSommet, std::vector<bool> casActuel,int);
         void partie3 (Svgfile& svgout,int);
         std::vector<std::vector<bool>> cas_possibles();
         void afficherCasPossible_Manhattan(Svgfile& svgout);
         bool Cas_Admissibles_Manhattan(std::vector<bool> cas_possible);
         std::vector<std::vector<bool>> cas_possibles_Partie3();
+        float nombreDivise_cout1(float nombre);
+        float nombreDivise_cout2(float nombre);
 
     protected:
 

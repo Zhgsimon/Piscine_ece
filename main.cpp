@@ -9,27 +9,26 @@ int main()
     do
     {
         std::string fichierchoisi;
-    std:: string extension1=".txt";
-    std::string extension2="_weights_0.txt";
-    std::string nomfichierchoisi;
-    std::string nomfichierpoids;
-    std::cout<<"Quel fichier allez-vous choisir?"<<std::endl;
-    std::cin>>fichierchoisi;
-    std::cout << "Oriente:1 / Non-oriente:0 . Votre choix : " ;
-    do {
-        std::cin >> oriente;
-    }while (oriente !=1 && oriente !=0);
-    nomfichierchoisi= fichierchoisi+extension1;
-    nomfichierpoids=fichierchoisi+extension2;
-    graphe g{nomfichierchoisi,nomfichierpoids,oriente};
+        std:: string extension1=".txt";
+        std::string extension2="_weights_0.txt";
+        std::string nomfichierchoisi;
+        std::string nomfichierpoids;
+        std::cout<<"Quel fichier allez-vous choisir?"<<std::endl;
+        std::cin>>fichierchoisi;
+        std::cout << "Oriente:1 / Non-oriente:0 . Votre choix : " ;
+        do {
+            std::cin >> oriente;
+        }while (oriente !=1 && oriente !=0);
+        nomfichierchoisi= fichierchoisi+extension1;
+        nomfichierpoids=fichierchoisi+extension2;
+        graphe g{nomfichierchoisi,nomfichierpoids,oriente};
         std::cout<<"------Bienvenue dans votre generateur------"<<std::endl;
         std::cout<<"------Faites un choix------"<<std::endl;
         std::cout<<"0.Quitter"<<std::endl;
         std::cout<<"1.Afficher votre graphe dans l'output"<<std::endl;
         std::cout<<"2.Afficher tous les cas possibles en console"<<std::endl;
         std::cout<<"3.Afficher l'arbre couvrant de poids minimum"<<std::endl;
-        std::cout<<"4.Afficher la frontière de Pareto"<<std::endl;
-        std::cout<<"5.Afficher le chemin le plus court de poids minimum"<<std::endl;
+        std::cout<<"4.Afficher le chemin le plus court de poids minimum"<<std::endl;
         std::cout<<"Votre choix:"<<std::endl;
         std::cin>>choix;
         switch(choix)
@@ -59,12 +58,6 @@ int main()
             }
 
         case 4:
-        {
-                Svgfile svgout;
-                g.afficherCasPossible_Manhattan(svgout);
-                break;
-            }
-        case 5:
             {
                 Svgfile svgout;
                 g.partie3(svgout,oriente);

@@ -50,5 +50,5 @@ std::vector<Sommet*> Sommet::getVoisins(){
 
 Sommet::~Sommet()
 {
-    //dtor
+
 }
